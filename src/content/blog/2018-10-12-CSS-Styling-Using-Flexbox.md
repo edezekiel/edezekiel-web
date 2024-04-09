@@ -1,9 +1,7 @@
 ---
-date: 2018-10-12
+pubDate: 2018-10-12
 title: 'CSS Styling Using Flexbox'
-slug: 2018-10-12-CSS-Styling-Using-Flexbox
-description:
-published: true
+description: ''
 tags: ['css']
 ---
 

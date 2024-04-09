@@ -1,9 +1,7 @@
 ---
-date: 2019-03-06
+pubDate: 2019-03-06
 title: 'My Capstone Full-Stack Web App: YouTube Academy'
-slug: 2019-03-06-YouTube-Academy
-description:
-published: true
+description: ''
 tags: ['react', 'ruby', 'bootcamp', 'projects', 'javascript']
 ---
 

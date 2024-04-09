@@ -1,9 +1,7 @@
 ---
-date: 2019-03-30
+pubDate: 2019-03-30
 title: 'CSS-Only Responsive Navigation Menu'
-slug: 2019-03-30-CSS-Only-Responsive-Navigation-Menu
-description:
-published: true
+description: ''
 tags: ['css', 'projects']
 ---
 

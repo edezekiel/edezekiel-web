@@ -1,9 +1,7 @@
 ---
-date: 2019-01-17
+pubDate: 2019-01-17
 title: 'Using Javascript "this" Keyword in React'
-slug: 2019-01-17-Using-Javascript-This-Keyword-In-React
-description:
-published: true
+description: ''
 tags: ['javascript', 'bootcamp']
 ---
 

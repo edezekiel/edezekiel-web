@@ -1,9 +1,7 @@
 ---
-date: 2019-05-24
+pubDate: 2019-05-24
 title: 'Building a Blazing Fast JAMstack App'
-slug: 2019-05-24-Building-A-Blazing-Fast-JAMstack-App
-description:
-published: true
+description: ''
 tags: ['javascript', 'jamstack', 'projects']
 ---
 

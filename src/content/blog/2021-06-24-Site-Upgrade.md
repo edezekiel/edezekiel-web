@@ -1,9 +1,7 @@
 ---
-date: 2021-06-24
+pubDate: 2021-06-24
 title: 'Site Upgrade'
-slug: 2021-06-24-Site-Upgrade
-description:
-published: true
+description: ''
 tags: ['javascript', 'projects']
 ---
 

@@ -1,9 +1,7 @@
 ---
-date: 2019-04-06
+pubDate: 2019-04-06
 title: 'Total Recall'
-slug: 2019-04-06-Total-Recall
-description:
-published: true
+description: ''
 tags: ['projects']
 ---
 

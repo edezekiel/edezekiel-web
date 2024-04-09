@@ -1,9 +1,7 @@
 ---
-date: 2020-09-10
+pubDate: 2020-09-10
 title: 'Building a Calculator - Frontend Masters Series'
-slug: 2020-09-10-Building-a-Calculator
-description:
-published: true
+description: ''
 tags: ['javascript', 'css']
 ---
 

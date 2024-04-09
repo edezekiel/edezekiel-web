@@ -1,9 +1,7 @@
 ---
-date: 2022-07-20
+pubDate: 2022-07-20
 title: 'Testing NgRx Effects with Async/Await'
-slug: 2022-07-20-Testing-NgRx-Effects-With-Async-Await
-description:
-published: false
+description: ''
 tags: ['javascript', 'angular']
 ---
 

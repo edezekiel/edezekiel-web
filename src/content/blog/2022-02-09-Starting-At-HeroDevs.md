@@ -1,9 +1,7 @@
 ---
-date: 2022-02-09
+pubDate: 2022-02-09
 title: 'Starting at HeroDevs 🎉🎉🎉'
-slug: 2022-02-09-Starting-At-HeroDevs
-description:
-published: true
+description: ''
 tags: ['javascript', 'angular']
 ---
 

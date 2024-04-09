@@ -1,9 +1,7 @@
 ---
-date: 2018-12-21
+pubDate: 2018-12-21
 title: 'fetch() - A Line-By-Line Walkthrough'
-slug: 2018-12-21-fetch-A-Line-By-Line-Walkthrough
-description:
-published: true
+description: ''
 tags: ['javascript', 'bootcamp']
 ---
 

@@ -1,9 +1,7 @@
 ---
-date: 2020-06-11
+pubDate: 2020-06-11
 title: 'Reverting a Faulty Merge and Fixing the Feature Branch'
-slug: 2020-06-11-Reverting-a-Faulty-Merge
-description:
-published: true
+description: ''
 tags: ['git']
 ---
 

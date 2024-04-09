@@ -1,9 +1,7 @@
 ---
-date: 2019-08-29
+pubDate: 2019-08-29
 title: 'Learning GraphQL'
-slug: 2019-08-29-Learning-GraphQL
-description:
-published: true
+description: ''
 tags: ['jamstack']
 ---
 

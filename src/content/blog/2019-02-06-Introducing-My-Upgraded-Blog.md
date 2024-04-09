@@ -1,9 +1,7 @@
 ---
-date: 2019-02-06
+pubDate: 2019-02-06
 title: 'Introducing My Upgraded Blog!'
-slug: 2019-02-06-Introducing-My-Upgraded-Blog
-description:
-published: true
+description: ''
 tags: ['react', 'ruby', 'projects']
 ---
 

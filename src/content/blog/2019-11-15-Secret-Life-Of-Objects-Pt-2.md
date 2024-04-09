@@ -1,9 +1,7 @@
 ---
-date: 2019-11-15
+pubDate: 2019-11-15
 title: 'The Secret Life of Objects, Part 2'
-slug: 2019-11-15-Secret-Life-Of-Objects-Pt-2
-description:
-published: true
+description: ''
 tags: ['javascript']
 ---
 

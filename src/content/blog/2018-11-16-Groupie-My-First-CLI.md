@@ -1,9 +1,7 @@
 ---
-date: 2018-11-16
+pubDate: 2018-11-16
 title: 'Groupie - My First CLI'
-slug: 2018-11-16-Groupie-My-First-CLI
-description:
-published: true
+description: ''
 tags: ['ruby', 'bootcamp', 'projects', 'shell']
 ---
 

@@ -1,9 +1,7 @@
 ---
-date: 2019-01-04
+pubDate: 2019-01-04
 title: 'Mod 3 Flatiron Project - Coffee Break'
-slug: 2019-01-04-Mod3-Flatiron-Project-Coffee-Break
-description:
-published: true
+description: ''
 tags: ['javascript', 'ruby', 'bootcamp', 'projects', 'agile']
 ---
 

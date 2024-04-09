@@ -1,9 +1,7 @@
 ---
-date: 2019-05-17
+pubDate: 2019-05-17
 title: 'Looping Using ES6 Syntax'
-slug: 2019-05-17-Looping-Using-ES6-Syntax
-description:
-published: true
+description: ''
 tags: ['javascript']
 ---
 

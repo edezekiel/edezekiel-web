@@ -1,9 +1,7 @@
 ---
-date: 2018-12-02
+pubDate: 2018-12-02
 title: 'Ruby on Rails - Why form_for Uses Instance Variables'
-slug: 2018-12-02-Form-For-Ruby-On-Rails
-description:
-published: true
+description: ''
 tags: ['ruby', 'bootcamp']
 ---
 

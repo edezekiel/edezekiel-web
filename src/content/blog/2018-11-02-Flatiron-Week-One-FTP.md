@@ -1,9 +1,7 @@
 ---
-date: 2018-11-02
+pubDate: 2018-11-02
 title: 'Flatiron Week One, File Transfer Protocol'
-slug: 2018-11-02-Flatiron-Week-One-FTP
-description:
-published: true
+description: ''
 tags: ['bootcamp', 'agile']
 ---
 

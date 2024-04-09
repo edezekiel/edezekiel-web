@@ -1,9 +1,7 @@
 ---
-date: 2019-06-26
+pubDate: 2019-06-26
 title: 'Coding Tips For New Web Developers.'
-slug: 2019-06-26-Coding-Tips-For-New-Web-Developers
-description:
-published: true
+description: ''
 tags: ['react', 'javascript', 'git']
 ---
 

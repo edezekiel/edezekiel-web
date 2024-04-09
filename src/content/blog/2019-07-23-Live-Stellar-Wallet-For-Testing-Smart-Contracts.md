@@ -1,9 +1,7 @@
 ---
-date: 2019-07-23
+pubDate: 2019-07-23
 title: 'Live Stellar Wallet for Testing Smart Contracts'
-slug: 2019-07-23-Live-Stellar-Wallet-For-Testing-Smart-Contracts
-description:
-published: true
+description: ''
 tags: ['react', 'projects', 'css', 'javascript']
 ---
 

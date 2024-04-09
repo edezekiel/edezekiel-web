@@ -1,9 +1,7 @@
 ---
-date: 2018-12-07
+pubDate: 2018-12-07
 title: '❤️ Pair Programming'
-slug: 2018-12-07-Pair-Programming
-description:
-published: true
+description: ''
 tags: ['ruby', 'bootcamp', 'projects', 'agile']
 ---
 

@@ -1,9 +1,7 @@
 ---
-date: 2018-10-17
+pubDate: 2018-10-17
 title: 'Navbars and Site Banners'
-slug: 2018-10-17-Navbars-And-Site-Banners
-description:
-published: true
+description: ''
 tags: ['css']
 ---
 

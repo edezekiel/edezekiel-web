@@ -1,9 +1,7 @@
 ---
-date: 2018-11-24
+pubDate: 2018-11-24
 title: 'Kaizoku - My First Ruby Gem'
-slug: 2018-11-24-Kaizoku-My-First-Ruby-Gem
-description:
-published: true
+description: ''
 tags: ['ruby', 'bootcamp', 'projects', 'shell']
 ---
 

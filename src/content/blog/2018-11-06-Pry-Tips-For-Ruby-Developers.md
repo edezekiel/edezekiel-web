@@ -1,9 +1,7 @@
 ---
-date: 2018-11-06
+pubDate: 2018-11-06
 title: 'Pry Tips for Ruby Developers'
-slug: 2018-11-06-Pry-Tips-For-Ruby-Developers
-description:
-published: true
+description: ''
 tags: ['ruby', 'bootcamp']
 ---
 

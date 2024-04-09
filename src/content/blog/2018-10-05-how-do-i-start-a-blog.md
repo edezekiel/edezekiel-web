@@ -1,9 +1,7 @@
 ---
-date: 2018-10-05
+pubDate: 2018-10-05
 title: "How Do I Start A Blog?"
-slug: 2018-10-05-how-do-i-start-a-blog
-description:
-published: true
+description: ''
 tags: ["projects"]
 ---
 

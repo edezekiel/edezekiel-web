@@ -1,9 +1,7 @@
 ---
-date: 2020-01-27
+pubDate: 2020-01-27
 title: 'A Smarter Robot - Eloquent JavaScript Continued'
-slug: 2020-01-27-A-Smarter-Robot
-description:
-published: true
+description: ''
 tags: ['javascript', 'projects']
 ---
 

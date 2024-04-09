@@ -1,9 +1,7 @@
 ---
-date: 2020-03-17
+pubDate: 2020-03-17
 title: 'Recursion and DOM Nodes'
-slug: 2020-03-17-Recursion-And-DOM-Nodes
-description:
-published: true
+description: ''
 tags: ['javascript']
 ---
 

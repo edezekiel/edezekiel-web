@@ -1,9 +1,7 @@
 ---
-date: 2020-12-31
+pubDate: 2020-12-31
 title: 'Replacing the Lodash Curry Method With ES6'
-slug: 2020-12-31-Currying-JavaScript
-description:
-published: true
+description: ''
 tags: ['javascript']
 ---
 

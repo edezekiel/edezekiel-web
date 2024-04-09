@@ -1,9 +1,7 @@
 ---
-date: 2020-02-28
+pubDate: 2020-02-28
 title: 'Project Palomar, Building a Spring Boot App the Agile Way'
-slug: 2020-02-28-Project-Palomar
-description:
-published: true
+description: ''
 tags: ['projects', 'agile', 'git']
 ---
 

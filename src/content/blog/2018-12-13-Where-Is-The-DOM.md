@@ -1,9 +1,7 @@
 ---
-date: 2018-12-13
+pubDate: 2018-12-13
 title: 'Where is the DOM?'
-slug: 2018-12-13-Where-Is-The-DOM
-description:
-published: true
+description: ''
 tags: ['bootcamp', 'javascript']
 ---
 

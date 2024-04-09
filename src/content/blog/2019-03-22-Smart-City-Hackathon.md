@@ -1,9 +1,7 @@
 ---
-date: 2019-03-22
+pubDate: 2019-03-22
 title: 'Smart City Hackathon'
-slug: 2019-03-22-Smart-City-Hackathon
-description:
-published: true
+description: ''
 tags: ['react', 'projects']
 ---
 

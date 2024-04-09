@@ -1,9 +1,7 @@
 ---
-date: 2019-06-01
+pubDate: 2019-06-01
 title: 'Becoming a Web Developer'
-slug: 2019-06-01-Becoming-A-Web-Developer
-description:
-published: true
+description: ''
 tags: ['bootcamp']
 ---
 

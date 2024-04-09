@@ -1,9 +1,7 @@
 ---
-date: 2019-05-04
+pubDate: 2019-05-04
 title: 'Javascript Testing With Mocha'
-slug: 2019-05-04-JavaScript-Testing-With-Mocha
-description:
-published: true
+description: ''
 tags: ['javascript']
 ---
 

@@ -1,9 +1,7 @@
 ---
-date: 2019-04-12
+pubDate: 2019-04-12
 title: 'Async Timer'
-slug: 2019-04-12-Async-Timer
-description:
-published: true
+description: ''
 tags: ['javascript', 'projects']
 ---
 

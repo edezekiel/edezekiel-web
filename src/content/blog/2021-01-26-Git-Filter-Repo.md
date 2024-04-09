@@ -1,9 +1,7 @@
 ---
-date: 2021-01-26
+pubDate: 2021-01-26
 title: "Git Filter Repo"
-slug: 2021-01-26-Git-Filter-Repo
-description:
-published: true
+description: ''
 tags: ["git", "shell"]
 ---
 

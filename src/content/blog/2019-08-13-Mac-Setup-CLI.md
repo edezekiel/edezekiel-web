@@ -1,9 +1,7 @@
 ---
-date: 2019-08-13
+pubDate: 2019-08-13
 title: 'Mac Setup CLI'
-slug: 2019-08-13-Mac-Setup-CLI
-description:
-published: true
+description: ''
 tags: ['projects', 'shell']
 ---
 

@@ -1,9 +1,7 @@
 ---
-date: 2019-10-30
+pubDate: 2019-10-30
 title: 'The Secret Life of Objects'
-slug: 2019-10-30-Secret-Life-Of-Objects
-description:
-published: true
+description: ''
 tags: ['javascript']
 ---
 
