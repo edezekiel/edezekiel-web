@@ -6,7 +6,7 @@ tags: ['javascript']
 ---
 
 This post wraps up my two-part series on [Eloquent JavaScript](https://eloquentjavascript.net/06_object.html), chapter 6.
-Checkout [part one](/blog/2019-10-30-Secret-Life-Of-Objects) if you haven't read it yet.
+Checkout [part one](/blog/2019-10-30-secret-life-of-objects) if you haven't read it yet.
 
 I am so happy to have finally completed Eloquent JS chapter six. This has been a personal milestone of my for a long time.
 
@@ -84,7 +84,7 @@ type `hasOwnProperty`. This will return the function, seemingly out
 of thin air.
 
 If you're interesed in learning about the DOM execution environment, check out
-my post [Where is the DOM?](/blog/2018-12-13-Where-Is-The-DOM)
+my post [Where is the DOM?](/blog/2018-12-13-where-is-the-dom)
 
 ### Concluding Thoughts
 

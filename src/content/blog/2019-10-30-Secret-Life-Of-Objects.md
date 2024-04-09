@@ -5,9 +5,7 @@ description: ''
 tags: ['javascript']
 ---
 
-This blog post is part 1 of 2.
-
-## The Secret Life of Objects (Part 1)
+This blog post is part 1 of [2](/blog/2019-11-15-secret-life-of-objects-pt-2).
 
 I've encountered several hurdles while learning JavaScript. One of the biggest
 challenges has been chapter six of [Eloquent JavaScript](https://eloquentjavascript.net/06_object.html). I got through chapters 1-5 before starting the Flatiron bootcamp, but reaching this chapter was like hitting a wall.
