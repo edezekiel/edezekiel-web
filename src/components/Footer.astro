@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import HeaderLink from './HeaderLink.astro';
 
 const today = new Date();
 const thirtyTwo = 32;
@@ -38,6 +39,16 @@ const thirtyTwo = 32;
         height={thirtyTwo}
       />
     </a>
+		<HeaderLink href='/rss.xml'>
+			<span class='sr-only'>Subscribe to my Feed</span>
+			<Icon
+				name='mdi:rss'
+				aria-hidden='true'
+				astro-icon='social/rss'
+				width={thirtyTwo}
+				height={thirtyTwo}
+			/></HeaderLink
+		>
   </div>
 </footer>
 <style>

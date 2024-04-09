@@ -8,7 +8,7 @@ export default defineConfig({
   site: 'https://edezekiel.com',
   integrations: [sitemap(), icon({
 		include: {
-			mdi: ['github', 'linkedin', 'twitter']
+			mdi: ['github', 'linkedin', 'twitter', 'rss']
 		}
 	})]
 });

@@ -7,86 +7,95 @@ const thirtyTwo = 32;
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-			<HeaderLink href="/rss.xml">RSS</HeaderLink>
-		</div>
-		<div class="social-links">
-			<a href='https://twitter.com/EdwardAEzekiel' target='_blank'>
-				<span class='sr-only'>Follow me on Twitter</span>
-				<Icon
-					name='mdi:twitter'
-					aria-hidden='true'
-					astro-icon='social/twitter'
-					width={thirtyTwo}
-					height={thirtyTwo}
-				/>
-			</a>
-			<a href='https://github.com/edezekiel' target='_blank'>
-				<span class='sr-only'>Go to my GitHub profile</span>
-				<Icon
-					name='mdi:github'
-					aria-hidden='true'
-					astro-icon='social/github'
-					width={thirtyTwo}
-					height={thirtyTwo}
-				/>
-			</a>
-			<a href='https://www.linkedin.com/in/edezekiel/' target='_blank'>
-				<span class='sr-only'>Follow me on LinkedIn</span>
-				<Icon
-					name='mdi:linkedin'
-					aria-hidden='true'
-					astro-icon='social/linkedin'
-					width={thirtyTwo}
-					height={thirtyTwo}
-				/>
-			</a>
-		</div>
-	</nav>
+  <nav>
+    <h2><a href='/'>{SITE_TITLE}</a></h2>
+    <div class='internal-links'>
+      <HeaderLink href='/'>Home</HeaderLink>
+      <HeaderLink href='/blog'>Blog</HeaderLink>
+      <HeaderLink href='/about'>About</HeaderLink>
+    </div>
+    <div class='social-links'>
+      <a href='https://twitter.com/EdwardAEzekiel' target='_blank'>
+        <span class='sr-only'>Follow me on Twitter</span>
+        <Icon
+          name='mdi:twitter'
+          aria-hidden='true'
+          astro-icon='social/twitter'
+          width={thirtyTwo}
+          height={thirtyTwo}
+        />
+      </a>
+      <a href='https://github.com/edezekiel' target='_blank'>
+        <span class='sr-only'>Go to my GitHub profile</span>
+        <Icon
+          name='mdi:github'
+          aria-hidden='true'
+          astro-icon='social/github'
+          width={thirtyTwo}
+          height={thirtyTwo}
+        />
+      </a>
+      <a href='https://www.linkedin.com/in/edezekiel/' target='_blank'>
+        <span class='sr-only'>Follow me on LinkedIn</span>
+        <Icon
+          name='mdi:linkedin'
+          aria-hidden='true'
+          astro-icon='social/linkedin'
+          width={thirtyTwo}
+          height={thirtyTwo}
+        />
+      </a>
+      <HeaderLink href='/rss.xml'>
+        <span class='sr-only'>Subscribe to my Feed</span>
+        <Icon
+          name='mdi:rss'
+          aria-hidden='true'
+          astro-icon='social/rss'
+          width={thirtyTwo}
+          height={thirtyTwo}
+        /></HeaderLink
+      >
+    </div>
+  </nav>
 </header>
 <style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
+  header {
+    margin: 0;
+    padding: 0 1em;
+    background: white;
+    box-shadow: 0 2px 8px rgba(var(--black), 5%);
+  }
+  h2 {
+    margin: 0;
+    font-size: 1em;
+  }
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
-	}
+  h2 a,
+  h2 a.active {
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav a {
+    padding: 1em 0.5em;
+    color: var(--black);
+    border-bottom: 4px solid transparent;
+    text-decoration: none;
+  }
+  nav a.active {
+    text-decoration: none;
+    border-bottom-color: var(--accent);
+  }
+  .social-links,
+  .social-links a {
+    display: flex;
+  }
+  @media (max-width: 720px) {
+    .social-links {
+      display: none;
+    }
+  }
 </style>
