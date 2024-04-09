@@ -4,6 +4,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const recentPosts = (await getCollection('blog'))
+  .filter((p) => p.data.pubDate)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 5);
 ---
