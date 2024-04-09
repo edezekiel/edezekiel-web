@@ -3,22 +3,30 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+import BlogPosts from '../components/BlogPosts.astro';
+
+const recentPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>👋 Hi, I'm Ed Ezekiel</h1>
-			<p>
-				I'm a software engineer and former attorney. Welcome to my web 
-				development digital garden.
-			</p>
-		</main>
-		<Footer />
-	</body>
+<html lang='en'>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>👋 Hi, I'm Ed Ezekiel</h1>
+      <p>
+        I'm a software engineer and former attorney. Welcome to my web
+        development digital garden.
+      </p>
+      <h3>Recent Posts:</h3>
+      <BlogPosts posts={recentPosts} />
+    </main>
+    <Footer />
+  </body>
 </html>
