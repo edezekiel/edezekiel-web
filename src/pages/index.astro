@@ -1,10 +1,10 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
-import BlogPosts from '../components/BlogPosts.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 const recentPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -19,13 +19,31 @@ const recentPosts = (await getCollection('blog'))
   <body>
     <Header />
     <main>
-      <h1>👋 Hi, I'm Ed Ezekiel</h1>
+      <h1>Hi, I'm Ed Ezekiel 👋</h1>
       <p>
         I'm a software engineer and former attorney. Welcome to my web
         development digital garden.
       </p>
-      <h3>Recent Posts:</h3>
-      <BlogPosts posts={recentPosts} />
+      <h3>Recent Posts</h3>
+      <ul>
+        {
+          recentPosts.map((post) => (
+            <li>
+              <a href={`/blog/${post.slug}/`}>
+                {post.data.title}
+              </a>, <FormattedDate date={post.data.pubDate} />
+            </li>
+          ))
+        }
+      </ul>
+      <h3>Speaking</h3>
+      <ul>
+        <li>
+          <a href='https://www.meetup.com/angularcommunity/events/298226033/' target="_blank"
+            >Angular Community Meetup</a
+          >, January 23rd, 2024
+        </li>
+      </ul>
     </main>
     <Footer />
   </body>
