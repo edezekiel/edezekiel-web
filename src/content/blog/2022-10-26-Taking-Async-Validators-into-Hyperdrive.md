@@ -1,7 +1,7 @@
 ---
-pubDate: 2023-10-26
+pubDate: 2022-10-26
 title: 'Taking Async Validators into Hyperdrive'
-description: ''
+description: 'How to save your galaxy from unhelpful forms'
 tags: ['ngrx', 'angular']
 ---
 
