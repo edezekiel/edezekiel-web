@@ -52,7 +52,7 @@ So, how could you mock the injected WidgetsFacade without using TestBed?
 
 If you just run the spec without TestBed you get this error:
 
-![Error NG0203 thrown when testing a Component without providing dependencies](..//2023-04-11-injection-context-error.png)
+![Error NG0203 thrown when testing a Component without providing dependencies](../images/2023-04-11-injection-context-error.png)
 
 In order to provide the service and mock its functions there are two steps:
 
@@ -111,7 +111,7 @@ Let’s walk through each step in the spec file:
 1. **Assign mock object**: create a JavaScript object and assign `jest.fn()` to the method you need to mock.
 1. **Get Component with Injection Context**: Thanks to the `classWithProviders` util, the returned component has the mocked provider!
 
-![FacadeMock is provided to HomeComponent as the WidgetsFacade](..//2023-04-11-widgets-facade.png)
+![FacadeMock is provided to HomeComponent as the WidgetsFacade](../images/2023-04-11-widgets-facade.png)
 
 ## 3. Testing DI Functions Without TestBed
 
