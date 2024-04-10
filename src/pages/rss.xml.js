@@ -8,18 +8,6 @@ export async function GET(context) {
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
 		site: context.site,
-		xmlns: {
-      media: "http://search.yahoo.com/mrss/",
-      atom: "http://www.w3.org/2005/Atom",
-    },
-		customData: `<media:content
-			type="image/svg"
-			width="32"
-			height="32"
-			medium="image"
-			title="Ed Ezekiel"
-			url="${context.site + 'favicon.svg'}" />
-		`,
 		items: posts.slice().reverse().map((post) => ({
 			...post.data,
 			link: `/blog/${post.slug}/`,
