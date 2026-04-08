@@ -29,3 +29,29 @@ const { title, pubDate, updatedDate } = Astro.props;
     </div>
   </article>
 </BaseLayout>
+
+<style>
+  .title h1 {
+    margin-bottom: 0.25em;
+  }
+  .date {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    margin-bottom: 0.5em;
+  }
+  .last-updated-on {
+    font-style: italic;
+    margin-top: 0.25em;
+  }
+  .prose :global(h2) {
+    margin-top: 2em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--border);
+  }
+  .prose :global(h3) {
+    margin-top: 1.5em;
+  }
+  .prose :global(li) {
+    margin-bottom: 0.4em;
+  }
+</style>

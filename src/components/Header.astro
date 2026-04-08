@@ -15,12 +15,11 @@ const thirtyTwo = 32;
       <HeaderLink href='/about'>About</HeaderLink>
     </div>
     <div class='social-links'>
-      <a href='https://twitter.com/EdwardAEzekiel' target='_blank'>
-        <span class='sr-only'>Follow me on Twitter</span>
+      <a href='https://bsky.app/profile/edezekiel.bsky.social' target='_blank'>
+        <span class='sr-only'>Follow me on Bluesky</span>
         <Icon
-          name='mdi:twitter'
+          name='simple-icons:bluesky'
           aria-hidden='true'
-          astro-icon='social/twitter'
           width={thirtyTwo}
           height={thirtyTwo}
         />
@@ -61,18 +60,19 @@ const thirtyTwo = 32;
 <style>
   header {
     margin: 0;
-    padding: 0 1em;
-    background: white;
-    box-shadow: 0 2px 8px rgba(var(--black), 5%);
+    padding: 0 1.5em;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
   }
   h2 {
     margin: 0;
     font-size: 1em;
   }
-
   h2 a,
   h2 a.active {
     text-decoration: none;
+    color: var(--accent);
+    font-weight: 700;
   }
   nav {
     display: flex;
@@ -81,17 +81,29 @@ const thirtyTwo = 32;
   }
   nav a {
     padding: 1em 0.5em;
-    color: var(--black);
-    border-bottom: 4px solid transparent;
+    color: var(--text-secondary);
+    border-bottom: 3px solid transparent;
     text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  nav a:hover {
+    color: var(--text-primary);
   }
   nav a.active {
     text-decoration: none;
-    border-bottom-color: var(--accent);
+    color: var(--accent-warm);
+    border-bottom-color: var(--accent-warm);
   }
   .social-links,
   .social-links a {
     display: flex;
+  }
+  .social-links a {
+    color: var(--text-secondary);
+    padding: 0.5em;
+  }
+  .social-links a:hover {
+    color: var(--accent-light);
   }
   @media (max-width: 720px) {
     .social-links {

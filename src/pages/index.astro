@@ -10,29 +10,110 @@ const recentPosts = (await getCollection('blog'))
 ---
 
 <BaseLayout>
-  <h1>Hi, I'm Ed Ezekiel 👋</h1>
-  <p>
-    I'm a software engineer and former attorney. Welcome to my web development
-    digital garden.
-  </p>
-  <h3>Recent Posts</h3>
-  <ul>
-    {
-      recentPosts.map((post) => (
-        <li>
-          <a href={`/blog/${post.slug}/`}>{post.data.title}</a>,{' '}
-          <FormattedDate date={post.data.pubDate} />
-        </li>
-      ))
-    }
-  </ul>
-  <h3>Speaking</h3>
-  <ul>
-    <li>
-      <a
-        href='https://www.meetup.com/angularcommunity/events/298226033/'
-        target='_blank'>Angular Community Meetup</a
-      >, January 23rd, 2024
-    </li>
-  </ul>
+  <div class='hero'>
+    <h1>Hi, I'm Ed Ezekiel</h1>
+    <p class='tagline'>
+      Senior Engineer at <a href='https://herodevs.com/' target='_blank'>HeroDevs</a>.
+      Former attorney. Building product security tooling and AI-assisted automation.
+    </p>
+  </div>
+
+  <section class='recent-posts'>
+    <h3>Recent Posts</h3>
+    <ul>
+      {
+        recentPosts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}/`}>
+              <span class='post-title'>{post.data.title}</span>
+              <span class='post-date'><FormattedDate date={post.data.pubDate} /></span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class='speaking'>
+    <h3>Speaking</h3>
+    <ul>
+      <li>
+        <a
+          href='https://www.meetup.com/angularcommunity/events/298226033/'
+          target='_blank'>Angular Community Meetup</a
+        >, January 23rd, 2024
+      </li>
+    </ul>
+  </section>
 </BaseLayout>
+
+<style>
+  .hero {
+    margin-bottom: 2.5em;
+  }
+  .hero h1 {
+    margin-bottom: 0.3em;
+  }
+  .tagline {
+    font-size: 1.15em;
+    color: var(--text-secondary);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  .recent-posts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+  }
+  .recent-posts li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1em;
+    padding: 0.75em 1em;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .recent-posts li a:hover {
+    background-color: var(--bg-card);
+    border-color: var(--border);
+  }
+  .post-title {
+    color: var(--text-primary);
+    transition: color 0.2s ease;
+  }
+  .recent-posts li a:hover .post-title {
+    color: var(--accent-warm);
+  }
+  .post-date {
+    color: var(--text-secondary);
+    font-size: 0.85em;
+    white-space: nowrap;
+  }
+  section {
+    margin-bottom: 2em;
+  }
+  h3 {
+    color: var(--accent);
+    margin-bottom: 0.75em;
+  }
+  .speaking ul {
+    list-style: none;
+    padding: 0;
+  }
+  .speaking li {
+    padding: 0.5em 1em;
+    color: var(--text-secondary);
+  }
+  @media (max-width: 720px) {
+    .recent-posts li a {
+      flex-direction: column;
+      gap: 0.15em;
+    }
+  }
+</style>
