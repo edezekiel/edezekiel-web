@@ -9,12 +9,11 @@ const thirtyTwo = 32;
 <footer>
   &copy; {today.getFullYear()} Edward Ezekiel. All rights reserved.
   <div class='social-links'>
-    <a href='https://twitter.com/EdwardAEzekiel' target='_blank'>
-      <span class='sr-only'>Follow me on Twitter</span>
+    <a href='https://bsky.app/profile/edezekiel.bsky.social' target='_blank'>
+      <span class='sr-only'>Follow me on Bluesky</span>
       <Icon
-        name='mdi:twitter'
+        name='simple-icons:bluesky'
         aria-hidden='true'
-        astro-icon='social/twitter'
         width={thirtyTwo}
         height={thirtyTwo}
       />
@@ -53,10 +52,12 @@ const thirtyTwo = 32;
 </footer>
 <style>
   footer {
-    padding: 2em 1em 6em 1em;
-    background: linear-gradient(var(--gray-gradient)) no-repeat;
-    color: rgb(var(--gray));
+    padding: 2em 1em 4em 1em;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
     text-align: center;
+    font-size: 0.9em;
   }
   .social-links {
     display: flex;
@@ -66,9 +67,10 @@ const thirtyTwo = 32;
   }
   .social-links a {
     text-decoration: none;
-    color: rgb(var(--gray));
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
   }
   .social-links a:hover {
-    color: rgb(var(--gray-dark));
+    color: var(--accent-light);
   }
 </style>
