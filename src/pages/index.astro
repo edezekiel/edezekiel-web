@@ -36,6 +36,13 @@ const recentPosts = (await getCollection('blog'))
             <a href={`/blog/${post.id}/`}>
               <span class='post-title'>{post.data.title}</span>
               <span class='post-date'><FormattedDate date={post.data.pubDate} /></span>
+              <span class='footprints'>
+                <span class='fp'></span>
+                <span class='fp'></span>
+                <span class='fp'></span>
+                <span class='fp'></span>
+                <span class='fp'></span>
+              </span>
             </a>
           </li>
         ))
@@ -145,24 +152,33 @@ const recentPosts = (await getCollection('blog'))
     background-color: var(--bg-card);
     border-color: var(--border);
   }
-  /* Hedgehog footprints on blog post hover */
-  .recent-posts li a::after {
-    content: '';
+  .recent-posts .footprints {
     position: absolute;
     right: 1em;
     bottom: 4px;
-    width: 36px;
-    height: 8px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    pointer-events: none;
+  }
+  .recent-posts .fp {
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
     opacity: 0;
     transition: opacity 0.3s ease;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 8'%3E%3Ccircle cx='4' cy='4' r='2' fill='%237c9a5e'/%3E%3Ccircle cx='12' cy='3' r='1.5' fill='%237c9a5e'/%3E%3Ccircle cx='19' cy='5' r='2' fill='%237c9a5e'/%3E%3Ccircle cx='27' cy='3.5' r='1.5' fill='%237c9a5e'/%3E%3Ccircle cx='33' cy='4.5' r='1.5' fill='%237c9a5e'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
   }
-  .recent-posts li a:hover::after {
-    opacity: 0.5;
+  .recent-posts .fp:nth-child(2),
+  .recent-posts .fp:nth-child(4) {
+    width: 3px;
+    height: 3px;
   }
+  .recent-posts li a:hover .fp:nth-child(1) { opacity: 0.5; transition-delay: 0s; }
+  .recent-posts li a:hover .fp:nth-child(2) { opacity: 0.5; transition-delay: 0.1s; }
+  .recent-posts li a:hover .fp:nth-child(3) { opacity: 0.5; transition-delay: 0.2s; }
+  .recent-posts li a:hover .fp:nth-child(4) { opacity: 0.5; transition-delay: 0.3s; }
+  .recent-posts li a:hover .fp:nth-child(5) { opacity: 0.5; transition-delay: 0.4s; }
   .post-title {
     color: var(--text-primary);
     transition: color 0.2s ease;
@@ -200,7 +216,7 @@ const recentPosts = (await getCollection('blog'))
       flex-direction: column;
       gap: 0.15em;
     }
-    .recent-posts li a::after {
+    .recent-posts .footprints {
       display: none;
     }
   }
