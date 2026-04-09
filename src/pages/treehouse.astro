@@ -1,0 +1,197 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+import img01 from '../assets/treehouse/01-measuring.jpg';
+import img02 from '../assets/treehouse/02-supports-and-footings.jpg';
+import img03 from '../assets/treehouse/03-deck-bracket.jpg';
+import img04 from '../assets/treehouse/04-beam-frame.jpg';
+import img05 from '../assets/treehouse/05-platform-framing.jpg';
+import img06 from '../assets/treehouse/06-deck-boards.jpg';
+import img07 from '../assets/treehouse/07-walls-going-up.jpg';
+import img08 from '../assets/treehouse/08-platform-celebration.jpg';
+import img09 from '../assets/treehouse/09-kids-on-deck.jpg';
+import img10 from '../assets/treehouse/10-drilling-together.jpg';
+import img11 from '../assets/treehouse/11-little-builder.jpg';
+import img12 from '../assets/treehouse/12-family-on-platform.jpg';
+import img13 from '../assets/treehouse/13-raising-walls.jpg';
+import img14 from '../assets/treehouse/14-walls-framed.jpg';
+
+import type { ImageMetadata } from 'astro';
+
+interface Update {
+  date: Date;
+  title: string;
+  body: string;
+  image?: ImageMetadata;
+}
+
+const updates: Update[] = [
+  {
+    date: new Date('2026-04-06'),
+    title: 'Walls going up',
+    body: 'OSB sheathing on the wall frames, stairs framed out. Starting to look like a real structure.',
+    image: img07,
+  },
+  {
+    date: new Date('2026-04-06'),
+    title: 'Raising the walls',
+    body: 'Three of us lifting the first wall frame into place on the platform.',
+    image: img13,
+  },
+  {
+    date: new Date('2026-04-06'),
+    title: 'Standing tall',
+    body: 'Wall frames up, braced and plumb. First time the treehouse has walls.',
+    image: img14,
+  },
+  {
+    date: new Date('2026-03-25'),
+    title: 'Deck boards down',
+    body: 'Platform is fully decked. Solid footing up in the tree now.',
+    image: img06,
+  },
+  {
+    date: new Date('2026-03-22'),
+    title: 'Platform framing',
+    body: 'Got the platform joists in place. First time standing on it.',
+    image: img05,
+  },
+  {
+    date: new Date('2026-03-22'),
+    title: 'First one up',
+    body: 'Celebrating on the beam frame. The platform is real.',
+    image: img08,
+  },
+  {
+    date: new Date('2026-03-22'),
+    title: 'Kids claim the deck',
+    body: 'Deck boards barely down and they\'re already up here.',
+    image: img09,
+  },
+  {
+    date: new Date('2026-03-22'),
+    title: 'Teaching the tools',
+    body: 'Showing him how to drive screws. He\'s a natural.',
+    image: img10,
+  },
+  {
+    date: new Date('2026-03-22'),
+    title: 'Little builder',
+    body: 'She grabbed the drill and got to work. No hesitation.',
+    image: img11,
+  },
+  {
+    date: new Date('2026-03-22'),
+    title: 'Family on the platform',
+    body: 'All three of us on the deck for the first time.',
+    image: img12,
+  },
+  {
+    date: new Date('2026-03-21'),
+    title: 'Beam frame on piers',
+    body: 'Freestanding beam structure leveled and set on the concrete piers.',
+    image: img04,
+  },
+  {
+    date: new Date('2026-03-01'),
+    title: 'DIY Deck brackets',
+    body: 'Pier brackets arrived. These connect the posts to the concrete footings.',
+    image: img03,
+  },
+  {
+    date: new Date('2025-11-16'),
+    title: 'Supports and footings',
+    body: 'First support beams bolted to the tree. Concrete pier footings set in the ground.',
+    image: img02,
+  },
+  {
+    date: new Date('2025-11-09'),
+    title: 'Measuring up',
+    body: 'Leveling the first beam. String line from the tree to figure out the right height.',
+    image: img01,
+  },
+];
+---
+
+<BaseLayout>
+  <article class='treehouse'>
+    <h1>The Treehouse Project</h1>
+    <p class='intro'>A backyard build, documented as it happens.</p>
+
+    <div class='timeline'>
+      {
+        updates.map((update) => (
+          <div class='update'>
+            <div class='update-date'>
+              <FormattedDate date={update.date} />
+            </div>
+            <h3>{update.title}</h3>
+            {update.image && (
+              <Image
+                src={update.image}
+                alt={update.title}
+                width={720}
+                loading='lazy'
+              />
+            )}
+            <p>{update.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .treehouse {
+    max-width: 720px;
+  }
+  .intro {
+    color: var(--text-secondary);
+    font-size: 1.1em;
+    margin-bottom: 2em;
+  }
+  .timeline {
+    border-left: 2px solid var(--border);
+    padding-left: 1.5em;
+    margin-left: 0.5em;
+  }
+  .update {
+    position: relative;
+    margin-bottom: 2.5em;
+  }
+  .update::before {
+    content: '';
+    position: absolute;
+    left: -2.05em;
+    top: 0.35em;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid var(--bg-primary);
+  }
+  .update-date {
+    color: var(--text-secondary);
+    font-size: 0.85em;
+    margin-bottom: 0.25em;
+  }
+  .update h3 {
+    font-size: 1.2em;
+    margin-bottom: 0.4em;
+    color: var(--accent-warm);
+  }
+  .update img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 0.75em 0;
+    border: 1px solid var(--border);
+  }
+  .update p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+</style>
