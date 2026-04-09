@@ -6,7 +6,7 @@
 
 ## Overview
 
-Add warmth, life, and discovery to edezekiel.com. The site already has a strong Rivian Green dark theme and hidden hedgehog Easter eggs. This work makes the forest come alive — one living moment (a wandering hedgehog), atmospheric lighting, and small rewards for attention.
+Add warmth, life, and discovery to edezekiel.com. The site already has a strong forest green dark theme and hidden hedgehog Easter eggs. This work makes the forest come alive — one living moment (a wandering hedgehog), atmospheric lighting, and small rewards for attention.
 
 **Constraints:** CSS-first, no animation libraries, no new dependencies. One small JS idle detector (~20 lines). Mobile-safe. Fast.
 
