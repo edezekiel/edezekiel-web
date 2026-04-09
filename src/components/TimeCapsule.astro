@@ -1,0 +1,258 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  mode: 'reveal' | 'vertical';
+  id: string;
+  title: string;
+  description: string;
+  eraLabel?: string;
+  image?: ImageMetadata;
+  images?: ImageMetadata[];
+  colors?: string[];
+  techStack?: string[];
+  links?: { label: string; url: string }[];
+  children?: { title: string; description: string; image?: ImageMetadata }[];
+}
+
+const {
+  mode,
+  id,
+  title,
+  description,
+  eraLabel,
+  image,
+  images,
+  colors,
+  techStack,
+  links,
+  children,
+} = Astro.props;
+
+const isReveal = mode === 'reveal';
+const isGrouped = (children?.length ?? 0) > 0;
+---
+
+<div
+  class:list={['capsule', `capsule--${mode}`, { 'capsule--grouped': isGrouped }]}
+  data-capsule-id={id}
+  id={id}
+>
+  {eraLabel && <span class='capsule-era-label'>{eraLabel}</span>}
+  <h3 class='capsule-title'>{title}</h3>
+
+  {image && (
+    <div class='capsule-screenshot'>
+      <Image
+        src={image}
+        alt={title}
+        width={720}
+        loading='lazy'
+      />
+    </div>
+  )}
+
+  <p class='capsule-description'>{description}</p>
+
+  {colors && colors.length > 0 && (
+    <div class='capsule-swatches'>
+      {colors.map((hex) => (
+        <div class='swatch'>
+          <span class='swatch-color' style={`background-color: ${hex};`} />
+          <span class='swatch-label'>{hex}</span>
+        </div>
+      ))}
+    </div>
+  )}
+
+  {techStack && techStack.length > 0 && (
+    <div class='capsule-tech'>
+      {techStack.map((tech) => (
+        <span class='tech-tag'>{tech}</span>
+      ))}
+    </div>
+  )}
+
+  {links && links.length > 0 && (
+    <div class='capsule-links'>
+      {links.map((link) => (
+        <a href={link.url} target='_blank' rel='noopener noreferrer' class='capsule-link'>
+          {link.label}
+        </a>
+      ))}
+    </div>
+  )}
+
+  {isGrouped && children && (
+    <div class='capsule-children'>
+      {children.map((child) => (
+        <div class='capsule-child'>
+          <h4>{child.title}</h4>
+          {child.image && (
+            <Image src={child.image} alt={child.title} width={720} loading='lazy' />
+          )}
+          <p>{child.description}</p>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
+<style>
+  .capsule {
+    position: relative;
+    margin-bottom: 2.5em;
+    padding-bottom: 2.5em;
+    border-bottom: 1px solid var(--border);
+  }
+  .capsule:last-child {
+    border-bottom: none;
+  }
+  .capsule--reveal {
+    opacity: 0.1;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .capsule--reveal.capsule--active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .capsule--reveal.capsule--visited {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+  .capsule--vertical {
+    position: relative;
+    padding-left: 1.5em;
+  }
+  .capsule--vertical::before {
+    content: '';
+    position: absolute;
+    left: -0.55em;
+    top: 0.35em;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid var(--bg-primary);
+  }
+  .capsule--grouped .capsule-children {
+    display: none;
+  }
+  .capsule--grouped.capsule--expanded .capsule-children {
+    display: block;
+  }
+  .capsule-era-label {
+    display: block;
+    color: var(--accent-warm);
+    font-size: 0.8em;
+    margin-bottom: 0.25em;
+  }
+  .capsule-title {
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+    color: var(--text-primary);
+  }
+  .capsule-screenshot {
+    margin: 0.75em 0;
+  }
+  .capsule-screenshot img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .capsule-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 640px;
+  }
+  .capsule-swatches {
+    display: flex;
+    gap: 1em;
+    margin: 0.75em 0;
+    align-items: center;
+  }
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+  .swatch-color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .swatch-label {
+    font-size: 0.75em;
+    color: var(--text-secondary);
+    font-family: monospace;
+  }
+  .capsule-tech {
+    display: flex;
+    gap: 0.5em;
+    flex-wrap: wrap;
+    margin: 0.75em 0;
+  }
+  .tech-tag {
+    font-size: 0.75em;
+    padding: 0.2em 0.6em;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-secondary);
+  }
+  .capsule-links {
+    display: flex;
+    gap: 0.6em;
+    margin-top: 0.75em;
+  }
+  .capsule-link {
+    font-size: 0.8em;
+    padding: 0.3em 0.7em;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--accent);
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  .capsule-link:hover {
+    background: var(--bg-secondary);
+    border-color: var(--accent);
+  }
+  .capsule-child {
+    margin-top: 1.5em;
+    padding-top: 1em;
+    border-top: 1px dashed var(--border);
+  }
+  .capsule-child h4 {
+    font-size: 1.1em;
+    color: var(--accent-warm);
+    margin-bottom: 0.3em;
+  }
+  .capsule-child img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 0.5em 0;
+    border: 1px solid var(--border);
+  }
+  .capsule-child p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .capsule--reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .capsule--reveal.capsule--visited {
+      opacity: 1;
+    }
+  }
+</style>
