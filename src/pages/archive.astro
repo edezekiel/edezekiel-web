@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectTimeline from '../components/ProjectTimeline.astro';
+import { eras } from '../data/archive';
+---
+
+<BaseLayout>
+  <article class='archive'>
+    <header class='archive-header'>
+      <h1>Archive</h1>
+      <p class='archive-subtitle'>Six versions of this site, from FTP to forest.</p>
+    </header>
+
+    <ProjectTimeline mode='reveal' entries={eras} />
+
+    <footer class='archive-footer'>
+      <p>Still growing.</p>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .archive-header {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .archive-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1em;
+    font-style: italic;
+  }
+  .archive-footer {
+    text-align: center;
+    padding: 2em 0;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+</style>
