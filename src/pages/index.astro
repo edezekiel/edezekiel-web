@@ -73,18 +73,6 @@ const recentPosts = (await getCollection('blog'))
 <style>
   .hero {
     margin-bottom: 2.5em;
-    position: relative;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -120px;
-    right: -60px;
-    width: 700px;
-    height: 500px;
-    background: radial-gradient(ellipse at 80% 10%, rgba(196, 183, 130, 0.09) 0%, rgba(122, 154, 94, 0.03) 40%, transparent 70%);
-    pointer-events: none;
-    z-index: -1;
   }
   .hero-footprints {
     display: flex;
