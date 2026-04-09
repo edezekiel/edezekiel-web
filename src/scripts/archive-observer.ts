@@ -52,21 +52,40 @@ export function initArchiveObserver() {
 
 	const controller = shelf ? createShelfController(shelf, 'center') : null;
 
-	// IntersectionObserver: reveal capsules and track active
-	const observer = new IntersectionObserver(
-		(entries) => {
-			let bestEntry: IntersectionObserverEntry | null = null;
-			let bestRatio = 0;
+	// IntersectionObserver: reveal capsules and track active.
+	// On each callback, scan ALL capsules' viewport positions to find the
+	// most prominent one.  This avoids the classic IO pitfall where only
+	// threshold-crossing entries are delivered, causing brief palette flips
+	// when the outgoing section fires alone with a stale ratio.
+	const capsuleArray = Array.from(capsules);
+	const activationLine = 0.4; // fraction of viewport height
 
-			for (const entry of entries) {
-				if (entry.intersectionRatio > bestRatio) {
-					bestRatio = entry.intersectionRatio;
-					bestEntry = entry;
-				}
+	function findActiveCapsule(): { el: HTMLElement; idx: number } | null {
+		const target = window.innerHeight * activationLine;
+		let best: HTMLElement | null = null;
+		let bestIdx = -1;
+		let bestDist = Number.POSITIVE_INFINITY;
+
+		for (let i = 0; i < capsuleArray.length; i++) {
+			const rect = capsuleArray[i].getBoundingClientRect();
+			// Capsule must overlap the viewport
+			if (rect.bottom < 0 || rect.top > window.innerHeight) continue;
+			// Distance from capsule's vertical center to the activation line
+			const center = (rect.top + rect.bottom) / 2;
+			const dist = Math.abs(center - target);
+			if (dist < bestDist) {
+				bestDist = dist;
+				best = capsuleArray[i];
+				bestIdx = i;
 			}
+		}
+		return best ? { el: best, idx: bestIdx } : null;
+	}
 
-			const capsuleArray = Array.from(capsules);
-			const activeIndex = bestEntry ? capsuleArray.indexOf(bestEntry.target as HTMLElement) : -1;
+	const observer = new IntersectionObserver(
+		() => {
+			const active = findActiveCapsule();
+			const activeIndex = active ? active.idx : -1;
 
 			capsuleArray.forEach((capsule, i) => {
 				const rect = capsule.getBoundingClientRect();
@@ -82,11 +101,10 @@ export function initArchiveObserver() {
 				}
 			});
 
-			if (bestEntry && bestRatio > 0.1) {
-				const id = (bestEntry.target as HTMLElement).dataset.capsuleId;
-				const idx = capsuleArray.indexOf(bestEntry.target as HTMLElement);
+			if (active) {
+				const id = active.el.dataset.capsuleId;
 				if (id) applyPalette(id);
-				if (idx >= 0) controller?.update(idx);
+				controller?.update(active.idx);
 			}
 		},
 		{
