@@ -1,0 +1,73 @@
+---
+import TimelineShelf from './TimelineShelf.astro';
+import TimeCapsule from './TimeCapsule.astro';
+import type { ArchiveEra } from '../data/types';
+import type { TimelineEntry } from '../data/types';
+
+interface Props {
+  mode: 'reveal' | 'vertical';
+  entries: TimelineEntry[] | ArchiveEra[];
+}
+
+const { mode, entries } = Astro.props;
+const isReveal = mode === 'reveal';
+
+const shelfEntries = isReveal
+  ? (entries as ArchiveEra[]).map((e) => ({
+      id: e.id,
+      label: e.title,
+      shortLabel: `Era ${(e as ArchiveEra).eraNumber}`,
+    }))
+  : [];
+
+const palettes = isReveal
+  ? (entries as ArchiveEra[]).map((e) => ({ id: e.id, palette: e.palette }))
+  : [];
+---
+
+<div
+  class:list={['project-timeline', `project-timeline--${mode}`]}
+  data-timeline-mode={mode}
+  data-palettes={isReveal ? JSON.stringify(palettes) : undefined}
+>
+  {isReveal && <TimelineShelf entries={shelfEntries} />}
+
+  <div class:list={['timeline-content', { 'timeline-vertical': !isReveal }]}>
+    {(entries as ArchiveEra[]).map((entry) => {
+      const eraLabel = isReveal
+        ? `Era ${entry.eraNumber} · ${entry.date.getFullYear()}${entry.endDate ? '–' + entry.endDate.getFullYear() : '–present'}`
+        : undefined;
+
+      return (
+        <TimeCapsule
+          mode={mode}
+          id={entry.id}
+          title={entry.title}
+          description={entry.description}
+          eraLabel={eraLabel}
+          image={entry.image}
+          images={entry.images}
+          colors={isReveal ? entry.colors : undefined}
+          techStack={isReveal ? entry.techStack : undefined}
+          links={entry.links}
+        />
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  .project-timeline--reveal {
+    position: relative;
+  }
+  .timeline-content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2em 0;
+  }
+  .timeline-vertical {
+    border-left: 2px solid var(--border);
+    padding-left: 1.5em;
+    margin-left: 0.5em;
+  }
+</style>
