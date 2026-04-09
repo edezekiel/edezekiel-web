@@ -73,6 +73,21 @@ const thirtyTwo = 32;
     text-decoration: none;
     color: var(--accent);
     font-weight: 700;
+    position: relative;
+  }
+  /* Hedgehog peeks out on site title hover */
+  h2 a::after {
+    content: '\1F994';
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 0.85em;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  h2 a:hover::after {
+    opacity: 1;
+    transform: translateX(0);
   }
   nav {
     display: flex;
