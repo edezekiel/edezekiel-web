@@ -172,31 +172,32 @@ const shelfEntries = milestones.map((m) => ({
       });
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        let bestEntry: IntersectionObserverEntry | null = null;
-        let bestRatio = 0;
+    // Use scroll listener instead of IntersectionObserver — milestone
+    // sections are tall (many images) so ratio-based detection is unreliable.
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const milestoneArray = Array.from(milestones);
+        const shelfHeight = shelf!.getBoundingClientRect().bottom;
+        let activeIdx = 0;
 
-        for (const entry of entries) {
-          if (entry.intersectionRatio > bestRatio) {
-            bestRatio = entry.intersectionRatio;
-            bestEntry = entry;
+        for (let i = 0; i < milestoneArray.length; i++) {
+          const rect = milestoneArray[i].getBoundingClientRect();
+          // Active = top of section is above the midpoint of the viewport
+          if (rect.top < window.innerHeight * 0.4 + shelfHeight) {
+            activeIdx = i;
           }
         }
 
-        if (bestEntry && bestRatio > 0.05) {
-          const milestoneArray = Array.from(milestones);
-          const idx = milestoneArray.indexOf(bestEntry.target as HTMLElement);
-          if (idx >= 0) updateShelf(idx);
-        }
-      },
-      {
-        threshold: [0, 0.1, 0.3, 0.5, 0.7, 1],
-        rootMargin: '-10% 0px -30% 0px',
-      },
-    );
+        updateShelf(activeIdx);
+      });
+    }
 
-    milestones.forEach((m) => observer.observe(m));
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // set initial state
 
     // Shelf dot click → smooth scroll
     shelf.addEventListener('click', (e) => {
@@ -212,7 +213,7 @@ const shelfEntries = milestones.map((m) => ({
 
     document.addEventListener(
       'astro:before-swap',
-      () => observer.disconnect(),
+      () => window.removeEventListener('scroll', onScroll),
       { once: true },
     );
   }
