@@ -1,6 +1,15 @@
 ---
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 import type { ImageMetadata } from 'astro';
+
+const linkIcons: Record<string, string> = {
+  'GitHub': 'mdi:github',
+  'Frontend': 'mdi:github',
+  'Backend': 'mdi:github',
+  'Wayback': 'mdi:history',
+  'Live': 'mdi:open-in-new',
+};
 
 interface Props {
   mode: 'reveal' | 'vertical';
@@ -78,6 +87,9 @@ const isGrouped = (children?.length ?? 0) > 0;
     <div class='capsule-links'>
       {links.map((link) => (
         <a href={link.url} target='_blank' rel='noopener noreferrer' class='capsule-link'>
+          {linkIcons[link.label] && (
+            <Icon name={linkIcons[link.label]} width={16} height={16} aria-hidden='true' />
+          )}
           {link.label}
         </a>
       ))}
@@ -219,6 +231,9 @@ const isGrouped = (children?.length ?? 0) > 0;
     color: var(--accent);
     text-decoration: none;
     transition: background-color 0.2s ease, border-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
   }
   .capsule-link:hover {
     background: var(--bg-secondary);
