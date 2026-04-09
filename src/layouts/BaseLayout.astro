@@ -48,8 +48,9 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
     <script>
       function initHedgehog() {
-        const hog = document.querySelector('.wandering-hedgehog');
-        if (!hog) return;
+        const el = document.querySelector('.wandering-hedgehog');
+        if (!el) return;
+        const hog = el;
         let timer: ReturnType<typeof setTimeout>;
         const events = ['scroll', 'mousemove', 'touchstart', 'keydown'];
         function trigger() {
