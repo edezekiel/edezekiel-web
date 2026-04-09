@@ -1,25 +1,25 @@
 ---
 import { Image } from 'astro:assets';
-import { Icon } from 'astro-icon/components';
 import type { ImageMetadata } from 'astro';
+import { Icon } from 'astro-icon/components';
 
 const linkIcons: Record<string, string> = {
-  'GitHub': 'mdi:github',
-  'Frontend': 'mdi:github',
-  'Backend': 'mdi:github',
-  'Wayback': 'mdi:history',
-  'Live': 'mdi:open-in-new',
+	GitHub: 'mdi:github',
+	Frontend: 'mdi:github',
+	Backend: 'mdi:github',
+	Wayback: 'mdi:history',
+	Live: 'mdi:open-in-new',
 };
 
 interface Props {
-  id: string;
-  title: string;
-  description: string;
-  eraLabel?: string;
-  image?: ImageMetadata;
-  colors?: string[];
-  techStack?: string[];
-  links?: { label: string; url: string }[];
+	id: string;
+	title: string;
+	description: string;
+	eraLabel?: string;
+	image?: ImageMetadata;
+	colors?: string[];
+	techStack?: string[];
+	links?: { label: string; url: string }[];
 }
 
 const { id, title, description, eraLabel, image, colors, techStack, links } = Astro.props;

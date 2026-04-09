@@ -1,12 +1,48 @@
-@property --bg-primary { syntax: '<color>'; inherits: true; initial-value: #1a1f1a; }
-@property --bg-secondary { syntax: '<color>'; inherits: true; initial-value: #232923; }
-@property --bg-card { syntax: '<color>'; inherits: true; initial-value: #2a322a; }
-@property --text-primary { syntax: '<color>'; inherits: true; initial-value: #e8ebe4; }
-@property --text-secondary { syntax: '<color>'; inherits: true; initial-value: #9ca89a; }
-@property --accent { syntax: '<color>'; inherits: true; initial-value: #7c9a5e; }
-@property --accent-light { syntax: '<color>'; inherits: true; initial-value: #a3c47d; }
-@property --accent-warm { syntax: '<color>'; inherits: true; initial-value: #c4a35a; }
-@property --border { syntax: '<color>'; inherits: true; initial-value: #3a443a; }
+@property --bg-primary {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #1a1f1a;
+}
+@property --bg-secondary {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #232923;
+}
+@property --bg-card {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #2a322a;
+}
+@property --text-primary {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #e8ebe4;
+}
+@property --text-secondary {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #9ca89a;
+}
+@property --accent {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #7c9a5e;
+}
+@property --accent-light {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #a3c47d;
+}
+@property --accent-warm {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #c4a35a;
+}
+@property --border {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #3a443a;
+}
 
 /*
   Forest Green theme — deep olive-green, nature-anchored, warm personality.
@@ -26,22 +62,22 @@
 }
 
 @font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-regular.woff') format('woff');
+	font-family: "Atkinson";
+	src: url("/fonts/atkinson-regular.woff") format("woff");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: 'Atkinson';
-	src: url('/fonts/atkinson-bold.woff') format('woff');
+	font-family: "Atkinson";
+	src: url("/fonts/atkinson-bold.woff") format("woff");
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }
 
 body {
-	font-family: 'Atkinson', sans-serif;
+	font-family: "Atkinson", sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -175,7 +211,8 @@ hr {
 	margin: 2em 0;
 }
 
-ul, ol {
+ul,
+ol {
 	color: var(--text-primary);
 }
 li {
@@ -201,11 +238,13 @@ li {
 	border: 0;
 	padding: 0;
 	margin: 0;
+	/* biome-ignore lint/complexity/noImportantStyles: sr-only requires !important to override any inherited positioning */
 	position: absolute !important;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
 	clip: rect(1px 1px 1px 1px);
+	/* biome-ignore lint/suspicious/noDuplicateProperties: fallback for older browsers that don't support comma syntax */
 	clip: rect(1px, 1px, 1px, 1px);
 	clip-path: inset(50%);
 	white-space: nowrap;

@@ -2,13 +2,13 @@
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
 import { projects } from '../data/projects';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const recentPosts = (await getCollection('blog'))
-  .filter((p) => p.data.pubDate)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 5);
+	.filter((p) => p.data.pubDate)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 5);
 ---
 
 <BaseLayout>

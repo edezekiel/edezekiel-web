@@ -1,26 +1,31 @@
 {
-  "name": "edezekiel-web",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "clean": "rm -rf dist .astro",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/check": "^0.9",
-    "@astrojs/rss": "^4",
-    "@astrojs/sitemap": "^3",
-    "astro": "^5",
-    "astro-expressive-code": "^0.41.7",
-    "astro-icon": "^1",
-    "typescript": "^5"
-  },
-  "devDependencies": {
-    "@iconify-json/mdi": "^1",
-    "@iconify-json/simple-icons": "^1"
-  }
+	"name": "edezekiel-web",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"clean": "rm -rf dist .astro",
+		"preview": "astro preview",
+		"astro": "astro",
+		"lint": "biome check .",
+		"lint:fix": "biome check --fix .",
+		"format": "biome format --write .",
+		"format:check": "biome format ."
+	},
+	"dependencies": {
+		"@astrojs/check": "^0.9",
+		"@astrojs/rss": "^4",
+		"@astrojs/sitemap": "^3",
+		"astro": "^5",
+		"astro-expressive-code": "^0.41.7",
+		"astro-icon": "^1",
+		"typescript": "^5"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.11",
+		"@iconify-json/mdi": "^1",
+		"@iconify-json/simple-icons": "^1"
+	}
 }
