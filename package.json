@@ -8,7 +8,11 @@
     "build": "astro check && astro build",
     "clean": "rm -rf dist .astro",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "biome check .",
+    "lint:fix": "biome check --fix .",
+    "format": "biome format --write .",
+    "format:check": "biome format ."
   },
   "dependencies": {
     "@astrojs/check": "^0.9",
@@ -20,6 +24,7 @@
     "typescript": "^5"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.11",
     "@iconify-json/mdi": "^1",
     "@iconify-json/simple-icons": "^1"
   }
