@@ -7,7 +7,7 @@ const thirtyTwo = 32;
 ---
 
 <footer>
-  &copy; {today.getFullYear()} Edward Ezekiel. All rights reserved.
+  &copy; {today.getFullYear()} Edward Ezekiel <span class='hedgehog-sep'>🦔</span> All rights reserved.
   <div class='social-links'>
     <a href='https://bsky.app/profile/edezekiel.bsky.social' target='_blank'>
       <span class='sr-only'>Follow me on Bluesky</span>
@@ -72,5 +72,14 @@ const thirtyTwo = 32;
   }
   .social-links a:hover {
     color: var(--accent-light);
+  }
+  .hedgehog-sep {
+    font-size: 0.85em;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+    cursor: default;
+  }
+  .hedgehog-sep:hover {
+    opacity: 1;
   }
 </style>

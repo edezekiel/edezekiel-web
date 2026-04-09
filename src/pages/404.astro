@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+  <div class='not-found'>
+    <div class='hedgehog'>🦔</div>
+    <h1>404</h1>
+    <p>This page curled up and rolled away.</p>
+    <a href='/'>Back to the trail</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .not-found {
+    text-align: center;
+    padding: 3em 0;
+  }
+  .not-found h1 {
+    font-size: 5em;
+    color: var(--accent);
+    margin-bottom: 0;
+    line-height: 1;
+  }
+  .not-found p {
+    color: var(--text-secondary);
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+  }
+  .not-found > a {
+    color: var(--accent-warm);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .not-found > a:hover {
+    border-bottom-color: var(--accent-warm);
+  }
+  .hedgehog {
+    font-size: 8em;
+    margin-bottom: 0.2em;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    cursor: default;
+  }
+  .hedgehog:hover {
+    transform: rotate(15deg) scale(1.1);
+  }
+</style>

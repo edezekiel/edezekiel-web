@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { projects } from '../data/projects';
 
 const recentPosts = (await getCollection('blog'))
   .filter((p) => p.data.pubDate)
@@ -16,6 +18,13 @@ const recentPosts = (await getCollection('blog'))
       Senior Engineer at <a href='https://herodevs.com/' target='_blank'>HeroDevs</a>.
       Former attorney. Building product security tooling and AI-assisted automation.
     </p>
+    <div class='hero-footprints'>
+      <span class='hero-print'></span>
+      <span class='hero-print'></span>
+      <span class='hero-print'></span>
+      <span class='hero-print'></span>
+      <span class='hero-print'></span>
+    </div>
   </div>
 
   <section class='recent-posts'>
@@ -27,11 +36,25 @@ const recentPosts = (await getCollection('blog'))
             <a href={`/blog/${post.id}/`}>
               <span class='post-title'>{post.data.title}</span>
               <span class='post-date'><FormattedDate date={post.data.pubDate} /></span>
+              <span class='footprints'>
+                <span class='fp'></span>
+                <span class='fp'></span>
+                <span class='fp'></span>
+                <span class='fp'></span>
+                <span class='fp'></span>
+              </span>
             </a>
           </li>
         ))
       }
     </ul>
+  </section>
+
+  <section class='projects'>
+    <h3>Projects</h3>
+    <div class='projects-grid'>
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
   </section>
 
   <section class='speaking'>
@@ -51,6 +74,28 @@ const recentPosts = (await getCollection('blog'))
   .hero {
     margin-bottom: 2.5em;
   }
+  .hero-footprints {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 1.5em;
+  }
+  .hero-print {
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0;
+    animation: footprint-appear 0.4s ease forwards;
+  }
+  .hero-print:nth-child(1) { animation-delay: 0.6s; }
+  .hero-print:nth-child(2) { animation-delay: 0.9s; width: 3px; height: 3px; }
+  .hero-print:nth-child(3) { animation-delay: 1.2s; }
+  .hero-print:nth-child(4) { animation-delay: 1.5s; width: 3px; height: 3px; }
+  .hero-print:nth-child(5) { animation-delay: 1.8s; }
+  @keyframes footprint-appear {
+    to { opacity: 0.4; }
+  }
   .hero h1 {
     margin-bottom: 0.3em;
   }
@@ -68,6 +113,9 @@ const recentPosts = (await getCollection('blog'))
     flex-direction: column;
     gap: 0.25em;
   }
+  .recent-posts li {
+    position: relative;
+  }
   .recent-posts li a {
     display: flex;
     justify-content: space-between;
@@ -83,6 +131,33 @@ const recentPosts = (await getCollection('blog'))
     background-color: var(--bg-card);
     border-color: var(--border);
   }
+  .recent-posts .footprints {
+    position: absolute;
+    right: 1em;
+    bottom: 4px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    pointer-events: none;
+  }
+  .recent-posts .fp {
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .recent-posts .fp:nth-child(2),
+  .recent-posts .fp:nth-child(4) {
+    width: 3px;
+    height: 3px;
+  }
+  .recent-posts li a:hover .fp:nth-child(1) { opacity: 0.5; transition-delay: 0s; }
+  .recent-posts li a:hover .fp:nth-child(2) { opacity: 0.5; transition-delay: 0.1s; }
+  .recent-posts li a:hover .fp:nth-child(3) { opacity: 0.5; transition-delay: 0.2s; }
+  .recent-posts li a:hover .fp:nth-child(4) { opacity: 0.5; transition-delay: 0.3s; }
+  .recent-posts li a:hover .fp:nth-child(5) { opacity: 0.5; transition-delay: 0.4s; }
   .post-title {
     color: var(--text-primary);
     transition: color 0.2s ease;
@@ -102,6 +177,11 @@ const recentPosts = (await getCollection('blog'))
     color: var(--accent);
     margin-bottom: 0.75em;
   }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.5em;
+  }
   .speaking ul {
     list-style: none;
     padding: 0;
@@ -114,6 +194,9 @@ const recentPosts = (await getCollection('blog'))
     .recent-posts li a {
       flex-direction: column;
       gap: 0.15em;
+    }
+    .recent-posts .footprints {
+      display: none;
     }
   }
 </style>
