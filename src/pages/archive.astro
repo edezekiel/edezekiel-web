@@ -2,19 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectTimeline from '../components/ProjectTimeline.astro';
 import { eras } from '../data/archive';
+
+// Reverse: most recent first so page loads in current Forest theme
+const reversedEras = [...eras].reverse();
 ---
 
 <BaseLayout>
   <article class='archive'>
     <header class='archive-header'>
       <h1>Archive</h1>
-      <p class='archive-subtitle'>Six versions of this site, from FTP to forest.</p>
+      <p class='archive-subtitle'>Still growing. Scroll down to travel back in time.</p>
     </header>
 
-    <ProjectTimeline mode='reveal' entries={eras} />
+    <ProjectTimeline mode='reveal' entries={reversedEras} />
 
     <footer class='archive-footer'>
-      <p>Still growing.</p>
+      <p>Where it all started.</p>
     </footer>
   </article>
 </BaseLayout>
