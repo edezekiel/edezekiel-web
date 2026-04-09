@@ -1,27 +1,35 @@
 # Ed Ezekiel Web
 
-Features:
+Personal site and blog at [edezekiel.com](https://edezekiel.com) — engineering, security, and the occasional deep dive.
 
-- ✅ Minimal styling
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap
-- ✅ RSS Feed
-- ✅ Markdown
+## Tech Stack
 
-## 🧞 Commands
+- [Astro 5](https://astro.build/) — static site generator
+- TypeScript
+- [Biome](https://biomejs.dev/) — linting and formatting
+- GitHub Actions CI (typecheck, lint, build)
+- Deployed via Netlify
 
-All commands are run from the root of the project, from a terminal:
+## Features
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- Blog with 45+ posts (2018–present)
+- [Treehouse project](https://edezekiel.com/treehouse) — photo-documented build timeline
+- RSS feed and sitemap
+- SEO-friendly with canonical URLs and OpenGraph data
+- Rivian Green dark theme with amber accents
+
+## Commands
+
+| Command              | Action                                      |
+| :------------------- | :------------------------------------------ |
+| `npm install`        | Install dependencies                        |
+| `npm run dev`        | Start local dev server at `localhost:4321`   |
+| `npm run build`      | Typecheck and build to `./dist/`            |
+| `npm run preview`    | Preview the build locally                   |
+| `npm run lint`       | Check with Biome                            |
+| `npm run lint:fix`   | Auto-fix lint issues                        |
+| `npm run format`     | Format with Biome                           |
 
 ## Credit
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Originally based on [Bear Blog](https://github.com/HermanMartinus/bearblog/).
