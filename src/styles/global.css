@@ -1,6 +1,5 @@
 /*
-  Rivian Green theme — deep olive-green, nature-anchored, warm personality.
-  Inspired by the 2026 Rivian R1T Launch Green.
+  Forest Green theme — deep olive-green, nature-anchored, warm personality.
  */
 
 :root {
@@ -138,14 +137,16 @@ code {
 	font-size: 0.9em;
 	color: var(--accent-light);
 }
-pre {
+/* Expressive Code handles pre/code styling in blog posts.
+   These rules apply to any pre blocks outside of Expressive Code. */
+pre:not(.expressive-code pre) {
 	padding: 1.5em;
 	border-radius: 8px;
-	background-color: var(--bg-secondary) !important;
+	background-color: var(--bg-secondary);
 	border: 1px solid var(--border);
 	overflow-x: auto;
 }
-pre > code {
+pre:not(.expressive-code pre) > code {
 	all: unset;
 }
 
