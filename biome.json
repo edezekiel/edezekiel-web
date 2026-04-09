@@ -1,7 +1,14 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.4.11/schema.json",
 	"files": {
-		"includes": ["**", "!**/dist", "!**/.astro", "!**/node_modules", "!**/.claude", "!**/.superpowers"]
+		"includes": [
+			"**",
+			"!**/dist",
+			"!**/.astro",
+			"!**/node_modules",
+			"!**/.claude",
+			"!**/.superpowers"
+		]
 	},
 	"formatter": {
 		"enabled": true,

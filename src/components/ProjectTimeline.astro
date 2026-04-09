@@ -1,18 +1,18 @@
 ---
-import TimelineShelf from './TimelineShelf.astro';
-import TimeCapsule from './TimeCapsule.astro';
 import type { ArchiveEra } from '../data/types';
+import TimeCapsule from './TimeCapsule.astro';
+import TimelineShelf from './TimelineShelf.astro';
 
 interface Props {
-  entries: ArchiveEra[];
+	entries: ArchiveEra[];
 }
 
 const { entries } = Astro.props;
 
 const shelfEntries = entries.map((e) => ({
-  id: e.id,
-  label: e.title,
-  shortLabel: `Era ${e.eraNumber}`,
+	id: e.id,
+	label: e.title,
+	shortLabel: `Era ${e.eraNumber}`,
 }));
 
 const palettes = entries.map((e) => ({ id: e.id, palette: e.palette }));
