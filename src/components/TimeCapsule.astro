@@ -121,16 +121,20 @@ const isGrouped = (children?.length ?? 0) > 0;
   .capsule:last-child {
     border-bottom: none;
   }
+  /* Default: fully visible (no-JS fallback).
+     JS adds .timeline--js-active to the parent, enabling reveal animations. */
   .capsule--reveal {
-    opacity: 0.1;
-    transform: translateY(20px);
     transition: opacity 0.4s ease, transform 0.4s ease;
   }
-  .capsule--reveal.capsule--active {
+  :global(.timeline--js-active) .capsule--reveal {
+    opacity: 0.1;
+    transform: translateY(20px);
+  }
+  :global(.timeline--js-active) .capsule--reveal.capsule--active {
     opacity: 1;
     transform: translateY(0);
   }
-  .capsule--reveal.capsule--visited {
+  :global(.timeline--js-active) .capsule--reveal.capsule--visited {
     opacity: 0.4;
     transform: translateY(0);
   }
@@ -261,12 +265,12 @@ const isGrouped = (children?.length ?? 0) > 0;
     line-height: 1.6;
   }
   @media (prefers-reduced-motion: reduce) {
-    .capsule--reveal {
+    :global(.timeline--js-active) .capsule--reveal {
       opacity: 1;
       transform: none;
       transition: none;
     }
-    .capsule--reveal.capsule--visited {
+    :global(.timeline--js-active) .capsule--reveal.capsule--visited {
       opacity: 1;
     }
   }

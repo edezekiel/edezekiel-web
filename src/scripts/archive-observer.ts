@@ -12,6 +12,10 @@ export function initArchiveObserver() {
   const shelf = timeline.querySelector<HTMLElement>('.shelf');
   if (!capsules.length) return;
 
+  // Signal that JS is active so CSS can apply reveal animations.
+  // Without this class, capsules render fully visible (no-JS fallback).
+  timeline.classList.add('timeline--js-active');
+
   // Parse palette data
   const palettesRaw = timeline.dataset.palettes;
   const palettes: { id: string; palette: Record<string, string> }[] =
@@ -143,6 +147,7 @@ export function initArchiveObserver() {
     () => {
       observer.disconnect();
       restoreDefaultPalette();
+      timeline.classList.remove('timeline--js-active');
     },
     { once: true },
   );

@@ -35,7 +35,7 @@ const palettes = isReveal
   <div class:list={['timeline-content', { 'timeline-vertical': !isReveal }]}>
     {(entries as ArchiveEra[]).map((entry) => {
       const eraLabel = isReveal
-        ? `Era ${entry.eraNumber} · ${entry.date.getFullYear()}${entry.endDate ? '–' + entry.endDate.getFullYear() : '–present'}`
+        ? `Era ${entry.eraNumber} · ${entry.date.getUTCFullYear()}${entry.endDate ? '–' + entry.endDate.getUTCFullYear() : '–present'}`
         : undefined;
 
       return (
