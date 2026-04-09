@@ -1,0 +1,90 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const isExternal = !project.internal;
+---
+
+<a
+  href={project.url}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener' : undefined}
+  class='project-card'
+>
+  <span class='ghost-emoji'>{project.emoji}</span>
+  <span class='project-name'>{project.name}</span>
+  <span class='project-desc'>{project.description}</span>
+  {project.lastUpdated && (
+    <span class='last-updated'>Updated {project.lastUpdated}</span>
+  )}
+  <div class='project-tags'>
+    {project.tags.map((tag) => <span class='tag'>{tag}</span>)}
+  </div>
+</a>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+    padding: 1em;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card:hover {
+    background-color: var(--bg-card);
+    border-color: var(--border);
+  }
+  .ghost-emoji {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    font-size: 1.3em;
+    opacity: 0.35;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+  .project-card:hover .ghost-emoji {
+    opacity: 0.7;
+  }
+  .project-name {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1em;
+    transition: color 0.2s ease;
+  }
+  .project-card:hover .project-name {
+    color: var(--accent-warm);
+  }
+  .project-desc {
+    color: var(--text-secondary);
+    font-size: 0.85em;
+    line-height: 1.5;
+  }
+  .last-updated {
+    color: var(--text-secondary);
+    font-size: 0.75em;
+  }
+  .project-tags {
+    display: flex;
+    gap: 0.4em;
+    flex-wrap: wrap;
+    margin-top: 0.2em;
+  }
+  .tag {
+    font-size: 0.72em;
+    color: var(--accent);
+    background: rgba(124, 154, 94, 0.1);
+    padding: 0.15em 0.5em;
+    border-radius: 4px;
+    border: 1px solid rgba(124, 154, 94, 0.2);
+  }
+</style>
