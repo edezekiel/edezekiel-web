@@ -1,5 +1,19 @@
 import type { ImageMetadata } from 'astro';
 
+export const PALETTE_KEYS = [
+  '--bg-primary',
+  '--bg-secondary',
+  '--bg-card',
+  '--text-primary',
+  '--text-secondary',
+  '--accent',
+  '--accent-light',
+  '--accent-warm',
+  '--border',
+] as const;
+
+export type PaletteMap = Record<(typeof PALETTE_KEYS)[number], string>;
+
 export interface TimelineEntry {
   id: string;
   date: Date;
@@ -7,24 +21,12 @@ export interface TimelineEntry {
   title: string;
   description: string;
   image?: ImageMetadata;
-  images?: ImageMetadata[];
-  metadata?: Record<string, string>;
   links?: { label: string; url: string }[];
 }
 
 export interface ArchiveEra extends TimelineEntry {
   eraNumber: number;
-  palette: {
-    '--bg-primary': string;
-    '--bg-secondary': string;
-    '--bg-card': string;
-    '--text-primary': string;
-    '--text-secondary': string;
-    '--accent': string;
-    '--accent-light': string;
-    '--accent-warm': string;
-    '--border': string;
-  };
+  palette: PaletteMap;
   colors: string[];
   techStack: string[];
 }

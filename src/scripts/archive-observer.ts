@@ -2,6 +2,9 @@
  * Scroll-linked reveal, dim, and shelf updates for the Archive page.
  * Also handles live theme swapping via CSS custom property overrides.
  */
+import { createShelfController } from './shelf-controller';
+import { PALETTE_KEYS } from '../data/types';
+
 export function initArchiveObserver() {
   const timeline = document.querySelector<HTMLElement>(
     '[data-timeline-mode="reveal"]',
@@ -24,18 +27,7 @@ export function initArchiveObserver() {
   // Store the forest (default) theme to restore on cleanup
   const rootStyle = getComputedStyle(document.documentElement);
   const defaultPalette: Record<string, string> = {};
-  const paletteKeys = [
-    '--bg-primary',
-    '--bg-secondary',
-    '--bg-card',
-    '--text-primary',
-    '--text-secondary',
-    '--accent',
-    '--accent-light',
-    '--accent-warm',
-    '--border',
-  ];
-  for (const key of paletteKeys) {
+  for (const key of PALETTE_KEYS) {
     defaultPalette[key] = rootStyle.getPropertyValue(key).trim();
   }
 
@@ -46,39 +38,19 @@ export function initArchiveObserver() {
     currentActiveId = id;
     const entry = palettes.find((p) => p.id === id);
     if (!entry) return;
-
-    const body = document.body;
     for (const [key, value] of Object.entries(entry.palette)) {
-      body.style.setProperty(key, value);
+      document.body.style.setProperty(key, value);
     }
   }
 
   function restoreDefaultPalette() {
-    const body = document.body;
     for (const [key, value] of Object.entries(defaultPalette)) {
-      body.style.setProperty(key, value);
+      document.body.style.setProperty(key, value);
     }
     currentActiveId = null;
   }
 
-  function updateShelf(activeIndex: number) {
-    if (!shelf) return;
-    const dots = shelf.querySelectorAll<HTMLElement>('.shelf-dot');
-    const segments = shelf.querySelectorAll<HTMLElement>('.shelf-segment');
-    const labels = shelf.querySelectorAll<HTMLElement>('.shelf-label');
-
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('dot--active', i === activeIndex);
-      dot.classList.toggle('dot--visited', i <= activeIndex);
-    });
-    segments.forEach((seg, i) => {
-      seg.classList.toggle('segment--filled', i < activeIndex);
-    });
-    labels.forEach((lbl, i) => {
-      lbl.classList.toggle('label--active', i === activeIndex);
-      lbl.classList.toggle('label--visited', i <= activeIndex);
-    });
-  }
+  const controller = shelf ? createShelfController(shelf, 'center') : null;
 
   // IntersectionObserver: reveal capsules and track active
   const observer = new IntersectionObserver(
@@ -116,7 +88,7 @@ export function initArchiveObserver() {
         const id = (bestEntry.target as HTMLElement).dataset.capsuleId;
         const idx = capsuleArray.indexOf(bestEntry.target as HTMLElement);
         if (id) applyPalette(id);
-        if (idx >= 0) updateShelf(idx);
+        if (idx >= 0) controller?.update(idx);
       }
     },
     {
@@ -127,25 +99,12 @@ export function initArchiveObserver() {
 
   capsules.forEach((capsule) => observer.observe(capsule));
 
-  // Shelf dot click → smooth scroll to capsule
-  if (shelf) {
-    shelf.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest<HTMLElement>('.shelf-dot');
-      if (!btn) return;
-      const targetId = btn.dataset.target;
-      if (!targetId) return;
-      const target = document.getElementById(targetId);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
-  }
-
   // Cleanup on page navigation (Astro ViewTransitions)
   document.addEventListener(
     'astro:before-swap',
     () => {
       observer.disconnect();
+      controller?.destroy();
       restoreDefaultPalette();
       timeline.classList.remove('timeline--js-active');
     },

@@ -1,48 +1,12 @@
-@property --bg-primary {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #1a1f1a;
-}
-@property --bg-secondary {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #232923;
-}
-@property --bg-card {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #2a322a;
-}
-@property --text-primary {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #e8ebe4;
-}
-@property --text-secondary {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #9ca89a;
-}
-@property --accent {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #7c9a5e;
-}
-@property --accent-light {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #a3c47d;
-}
-@property --accent-warm {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #c4a35a;
-}
-@property --border {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #3a443a;
-}
+@property --bg-primary { syntax: '<color>'; inherits: true; initial-value: #1a1f1a; }
+@property --bg-secondary { syntax: '<color>'; inherits: true; initial-value: #232923; }
+@property --bg-card { syntax: '<color>'; inherits: true; initial-value: #2a322a; }
+@property --text-primary { syntax: '<color>'; inherits: true; initial-value: #e8ebe4; }
+@property --text-secondary { syntax: '<color>'; inherits: true; initial-value: #9ca89a; }
+@property --accent { syntax: '<color>'; inherits: true; initial-value: #7c9a5e; }
+@property --accent-light { syntax: '<color>'; inherits: true; initial-value: #a3c47d; }
+@property --accent-warm { syntax: '<color>'; inherits: true; initial-value: #c4a35a; }
+@property --border { syntax: '<color>'; inherits: true; initial-value: #3a443a; }
 
 /*
   Forest Green theme — deep olive-green, nature-anchored, warm personality.

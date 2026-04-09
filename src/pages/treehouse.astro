@@ -146,77 +146,7 @@ const shelfEntries = milestones.map((m) => ({
 </BaseLayout>
 
 <script>
-  function initTreehouseShelf() {
-    const timeline = document.querySelector<HTMLElement>('[data-timeline-mode="treehouse"]');
-    if (!timeline) return;
-
-    const milestones = timeline.querySelectorAll<HTMLElement>('[data-milestone-id]');
-    const shelf = timeline.querySelector<HTMLElement>('.shelf');
-    if (!milestones.length || !shelf) return;
-
-    function updateShelf(activeIndex: number) {
-      const dots = shelf!.querySelectorAll<HTMLElement>('.shelf-dot');
-      const segments = shelf!.querySelectorAll<HTMLElement>('.shelf-segment');
-      const labels = shelf!.querySelectorAll<HTMLElement>('.shelf-label');
-
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('dot--active', i === activeIndex);
-        dot.classList.toggle('dot--visited', i <= activeIndex);
-      });
-      segments.forEach((seg, i) => {
-        seg.classList.toggle('segment--filled', i < activeIndex);
-      });
-      labels.forEach((lbl, i) => {
-        lbl.classList.toggle('label--active', i === activeIndex);
-        lbl.classList.toggle('label--visited', i <= activeIndex);
-      });
-    }
-
-    // Use scroll listener instead of IntersectionObserver — milestone
-    // sections are tall (many images) so ratio-based detection is unreliable.
-    let ticking = false;
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        ticking = false;
-        const milestoneArray = Array.from(milestones);
-        const shelfHeight = shelf!.getBoundingClientRect().bottom;
-        let activeIdx = 0;
-
-        for (let i = 0; i < milestoneArray.length; i++) {
-          const rect = milestoneArray[i].getBoundingClientRect();
-          // Active = top of section is above the midpoint of the viewport
-          if (rect.top < window.innerHeight * 0.4 + shelfHeight) {
-            activeIdx = i;
-          }
-        }
-
-        updateShelf(activeIdx);
-      });
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // set initial state
-
-    // Shelf dot click → smooth scroll
-    shelf.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest<HTMLElement>('.shelf-dot');
-      if (!btn) return;
-      const targetId = btn.dataset.target;
-      if (!targetId) return;
-      const target = document.getElementById(targetId);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-
-    document.addEventListener(
-      'astro:before-swap',
-      () => window.removeEventListener('scroll', onScroll),
-      { once: true },
-    );
-  }
+  import { initTreehouseShelf } from '../scripts/treehouse-shelf';
   document.addEventListener('astro:page-load', initTreehouseShelf);
 </script>
 
@@ -236,6 +166,7 @@ const shelfEntries = milestones.map((m) => ({
     margin-bottom: 3em;
     padding-bottom: 2em;
     border-bottom: 1px solid var(--border);
+    scroll-margin-top: 5em;
   }
   .milestone:last-child {
     border-bottom: none;
