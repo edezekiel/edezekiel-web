@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { projects } from '../data/projects';
 
 const recentPosts = (await getCollection('blog'))
   .filter((p) => p.data.pubDate)
@@ -16,6 +18,13 @@ const recentPosts = (await getCollection('blog'))
       Senior Engineer at <a href='https://herodevs.com/' target='_blank'>HeroDevs</a>.
       Former attorney. Building product security tooling and AI-assisted automation.
     </p>
+    <div class='hero-footprints'>
+      <span class='hero-print'></span>
+      <span class='hero-print'></span>
+      <span class='hero-print'></span>
+      <span class='hero-print'></span>
+      <span class='hero-print'></span>
+    </div>
   </div>
 
   <section class='recent-posts'>
@@ -34,6 +43,13 @@ const recentPosts = (await getCollection('blog'))
     </ul>
   </section>
 
+  <section class='projects'>
+    <h3>Projects</h3>
+    <div class='projects-grid'>
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+
   <section class='speaking'>
     <h3>Speaking</h3>
     <ul>
@@ -50,6 +66,49 @@ const recentPosts = (await getCollection('blog'))
 <style>
   .hero {
     margin-bottom: 2.5em;
+    position: relative;
+  }
+  .hero::before,
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .hero::before {
+    top: -60px;
+    left: -40px;
+    background: radial-gradient(ellipse, rgba(122, 154, 94, 0.08) 0%, transparent 70%);
+  }
+  .hero::after {
+    top: -40px;
+    right: -20px;
+    background: radial-gradient(ellipse, rgba(196, 163, 90, 0.06) 0%, transparent 70%);
+  }
+  .hero-footprints {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 1.5em;
+  }
+  .hero-print {
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0;
+    animation: footprint-appear 0.4s ease forwards;
+  }
+  .hero-print:nth-child(1) { animation-delay: 0.6s; }
+  .hero-print:nth-child(2) { animation-delay: 0.9s; width: 3px; height: 3px; }
+  .hero-print:nth-child(3) { animation-delay: 1.2s; }
+  .hero-print:nth-child(4) { animation-delay: 1.5s; width: 3px; height: 3px; }
+  .hero-print:nth-child(5) { animation-delay: 1.8s; }
+  @keyframes footprint-appear {
+    to { opacity: 0.4; }
   }
   .hero h1 {
     margin-bottom: 0.3em;
@@ -68,6 +127,9 @@ const recentPosts = (await getCollection('blog'))
     flex-direction: column;
     gap: 0.25em;
   }
+  .recent-posts li {
+    position: relative;
+  }
   .recent-posts li a {
     display: flex;
     justify-content: space-between;
@@ -82,6 +144,24 @@ const recentPosts = (await getCollection('blog'))
   .recent-posts li a:hover {
     background-color: var(--bg-card);
     border-color: var(--border);
+  }
+  /* Hedgehog footprints on blog post hover */
+  .recent-posts li a::after {
+    content: '';
+    position: absolute;
+    right: 1em;
+    bottom: 4px;
+    width: 36px;
+    height: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 8'%3E%3Ccircle cx='4' cy='4' r='2' fill='%237c9a5e'/%3E%3Ccircle cx='12' cy='3' r='1.5' fill='%237c9a5e'/%3E%3Ccircle cx='19' cy='5' r='2' fill='%237c9a5e'/%3E%3Ccircle cx='27' cy='3.5' r='1.5' fill='%237c9a5e'/%3E%3Ccircle cx='33' cy='4.5' r='1.5' fill='%237c9a5e'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .recent-posts li a:hover::after {
+    opacity: 0.5;
   }
   .post-title {
     color: var(--text-primary);
@@ -102,6 +182,11 @@ const recentPosts = (await getCollection('blog'))
     color: var(--accent);
     margin-bottom: 0.75em;
   }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.5em;
+  }
   .speaking ul {
     list-style: none;
     padding: 0;
@@ -114,6 +199,9 @@ const recentPosts = (await getCollection('blog'))
     .recent-posts li a {
       flex-direction: column;
       gap: 0.15em;
+    }
+    .recent-posts li a::after {
+      display: none;
     }
   }
 </style>
