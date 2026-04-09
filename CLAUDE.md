@@ -39,4 +39,4 @@ npm run format     # Format with Biome
 - Blog posts go in `src/content/blog/` as Markdown files with frontmatter (title, description, pubDate, heroImage)
 - Site constants (title, description) live in `src/consts.ts`
 - CSS uses custom properties defined in `src/styles/global.css` — respect the existing color palette
-- No test framework currently configured
+- Tests use Vitest (`npm test`) — CI runs them before build
