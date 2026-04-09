@@ -1,0 +1,57 @@
+---
+import TimelineShelf from './TimelineShelf.astro';
+import TimeCapsule from './TimeCapsule.astro';
+import type { ArchiveEra } from '../data/types';
+
+interface Props {
+  entries: ArchiveEra[];
+}
+
+const { entries } = Astro.props;
+
+const shelfEntries = entries.map((e) => ({
+  id: e.id,
+  label: e.title,
+  shortLabel: `Era ${e.eraNumber}`,
+}));
+
+const palettes = entries.map((e) => ({ id: e.id, palette: e.palette }));
+---
+
+<div
+  class='project-timeline'
+  data-timeline-mode='reveal'
+  data-palettes={JSON.stringify(palettes)}
+>
+  <TimelineShelf entries={shelfEntries} />
+
+  <div class='timeline-content'>
+    {entries.map((entry) => {
+      const eraLabel = `Era ${entry.eraNumber} · ${entry.date.getUTCFullYear()}${entry.endDate ? '–' + entry.endDate.getUTCFullYear() : '–present'}`;
+
+      return (
+        <TimeCapsule
+          id={entry.id}
+          title={entry.title}
+          description={entry.description}
+          eraLabel={eraLabel}
+          image={entry.image}
+          colors={entry.colors}
+          techStack={entry.techStack}
+          links={entry.links}
+        />
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  .project-timeline {
+    position: relative;
+  }
+  .timeline-content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2em 0;
+  }
+</style>

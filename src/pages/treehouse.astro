@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import TimelineShelf from '../components/TimelineShelf.astro';
+import type { ImageMetadata } from 'astro';
 
 import img01 from '../assets/treehouse/01-measuring.jpg';
 import img02 from '../assets/treehouse/02-supports-and-footings.jpg';
@@ -27,8 +29,6 @@ import img22 from '../assets/treehouse/22-ace-mixing-concrete.jpg';
 import img24 from '../assets/treehouse/24-setting-post-holes.jpg';
 import img25 from '../assets/treehouse/25-ace-tube-form.jpg';
 
-import type { ImageMetadata } from 'astro';
-
 interface Update {
   date: Date;
   title: string;
@@ -36,146 +36,78 @@ interface Update {
   image?: ImageMetadata;
 }
 
-const updates: Update[] = [
+interface Milestone {
+  id: string;
+  label: string;
+  shortLabel: string;
+  description: string;
+  updates: Update[];
+}
+
+// Milestones in reverse chronological order (most recent first)
+const milestones: Milestone[] = [
   {
-    date: new Date('2026-04-06'),
-    title: 'Walls going up',
-    body: 'Zip System sheathing on the wall frames, stairs framed out. Starting to look like a real structure.',
-    image: img07,
+    id: 'house',
+    label: 'House',
+    shortLabel: 'House',
+    description: 'Walls going up. Starting to look like a real structure.',
+    updates: [
+      { date: new Date('2026-04-06'), title: 'Walls going up', body: 'Zip System sheathing on the wall frames, stairs framed out. Starting to look like a real structure.', image: img07 },
+      { date: new Date('2026-04-06'), title: 'Raising the walls', body: 'Me, Greg, and Dave lifting the first wall frame into place on the platform.', image: img13 },
+      { date: new Date('2026-04-06'), title: 'Standing tall', body: 'Wall frames up, braced and plumb. First time the treehouse has walls.', image: img14 },
+    ],
   },
   {
-    date: new Date('2026-04-06'),
-    title: 'Raising the walls',
-    body: 'Me, Greg, and Dave lifting the first wall frame into place on the platform.',
-    image: img13,
+    id: 'deck',
+    label: 'Deck',
+    shortLabel: 'Deck',
+    description: 'Platform framed, decked, and claimed by the crew.',
+    updates: [
+      { date: new Date('2026-03-25'), title: 'Deck boards down', body: 'Platform is fully decked. Solid footing up in the tree now.', image: img06 },
+      { date: new Date('2026-03-22'), title: 'Platform framing', body: 'Farley and Ace helping to install the platform joists.', image: img05 },
+      { date: new Date('2026-03-22'), title: 'First one up', body: 'Celebrating on the beam frame. The platform is real.', image: img08 },
+      { date: new Date('2026-03-22'), title: 'Kids claim the deck', body: 'Deck boards barely down and Teddy and Ace are already up here.', image: img09 },
+      { date: new Date('2026-03-22'), title: 'Teaching the tools', body: 'Showing Teddy how to drive screws. He\'s a natural.', image: img10 },
+      { date: new Date('2026-03-22'), title: 'Little builder', body: 'Ace grabbed the drill and got to work. No hesitation.', image: img11 },
+      { date: new Date('2026-03-22'), title: 'Family on the platform', body: 'Me, Teddy, and Ace on the deck for the first time.', image: img12 },
+      { date: new Date('2026-03-21'), title: 'Beam frame on piers', body: 'Freestanding beam structure leveled and set on the concrete piers.', image: img04 },
+    ],
   },
   {
-    date: new Date('2026-04-06'),
-    title: 'Standing tall',
-    body: 'Wall frames up, braced and plumb. First time the treehouse has walls.',
-    image: img14,
+    id: 'footings',
+    label: 'Footings',
+    shortLabel: 'Footings',
+    description: 'Measuring, digging, and pouring the foundation.',
+    updates: [
+      { date: new Date('2025-11-16'), title: 'Supports and footings', body: 'First support beams bolted to the tree. Concrete pier footings set in the ground.', image: img02 },
+      { date: new Date('2025-11-16'), title: 'Setting post holes', body: 'Ace and me setting the post holes.', image: img24 },
+      { date: new Date('2025-11-16'), title: 'Strongest on the crew', body: 'Ace hauling the concrete tube form. Strongest one on the crew.', image: img25 },
+      { date: new Date('2025-11-16'), title: 'Concrete in pajamas', body: 'Ace mixing concrete in her pajamas. Committed to the cause.', image: img22 },
+      { date: new Date('2025-11-09'), title: 'Measuring up', body: 'Leveling the first beam. String line from the tree to figure out the right height.', image: img01 },
+      { date: new Date('2025-11-09'), title: 'Digging with the crew', body: 'Teddy and Ace helping dig the footing holes.', image: img20 },
+      { date: new Date('2025-11-09'), title: 'Footing holes', body: 'Footing holes dug. Three piers to support the platform.', image: img21 },
+    ],
   },
   {
-    date: new Date('2026-03-25'),
-    title: 'Deck boards down',
-    body: 'Platform is fully decked. Solid footing up in the tree now.',
-    image: img06,
-  },
-  {
-    date: new Date('2026-03-22'),
-    title: 'Platform framing',
-    body: 'Farley and Ace helping to install the platform joists.',
-    image: img05,
-  },
-  {
-    date: new Date('2026-03-22'),
-    title: 'First one up',
-    body: 'Celebrating on the beam frame. The platform is real.',
-    image: img08,
-  },
-  {
-    date: new Date('2026-03-22'),
-    title: 'Kids claim the deck',
-    body: 'Deck boards barely down and Teddy and Ace are already up here.',
-    image: img09,
-  },
-  {
-    date: new Date('2026-03-22'),
-    title: 'Teaching the tools',
-    body: 'Showing Teddy how to drive screws. He\'s a natural.',
-    image: img10,
-  },
-  {
-    date: new Date('2026-03-22'),
-    title: 'Little builder',
-    body: 'Ace grabbed the drill and got to work. No hesitation.',
-    image: img11,
-  },
-  {
-    date: new Date('2026-03-22'),
-    title: 'Family on the platform',
-    body: 'Me, Teddy, and Ace on the deck for the first time.',
-    image: img12,
-  },
-  {
-    date: new Date('2026-03-21'),
-    title: 'Beam frame on piers',
-    body: 'Freestanding beam structure leveled and set on the concrete piers.',
-    image: img04,
-  },
-{
-    date: new Date('2025-11-16'),
-    title: 'Supports and footings',
-    body: 'First support beams bolted to the tree. Concrete pier footings set in the ground.',
-    image: img02,
-  },
-  {
-    date: new Date('2025-11-16'),
-    title: 'Setting post holes',
-    body: 'Ace and me setting the post holes.',
-    image: img24,
-  },
-  {
-    date: new Date('2025-11-16'),
-    title: 'Strongest on the crew',
-    body: 'Ace hauling the concrete tube form. Strongest one on the crew.',
-    image: img25,
-  },
-  {
-    date: new Date('2025-11-16'),
-    title: 'Concrete in pajamas',
-    body: 'Ace mixing concrete in her pajamas. Committed to the cause.',
-    image: img22,
-  },
-  {
-    date: new Date('2025-11-09'),
-    title: 'Measuring up',
-    body: 'Leveling the first beam. String line from the tree to figure out the right height.',
-    image: img01,
-  },
-  {
-    date: new Date('2025-11-09'),
-    title: 'Digging with the crew',
-    body: 'Teddy and Ace helping dig the footing holes.',
-    image: img20,
-  },
-  {
-    date: new Date('2025-11-09'),
-    title: 'Footing holes',
-    body: 'Footing holes dug. Three piers to support the platform.',
-    image: img21,
-  },
-  {
-    date: new Date('2025-11-08'),
-    title: 'First one up',
-    body: 'Teddy\'s the first one up on the Tribeam.',
-    image: img19,
-  },
-  {
-    date: new Date('2025-11-08'),
-    title: 'Installing the TAB',
-    body: 'Me, Tristan, and Dave using every ounce of leverage we can manage to get the TAB installed.',
-    image: img18,
-  },
-  {
-    date: new Date('2025-10-26'),
-    title: 'Triangle brace',
-    body: 'Triangle brace frame laid out and test-fitted.',
-    image: img17,
-  },
-  {
-    date: new Date('2025-10-05'),
-    title: 'Tribeam assembled',
-    body: 'After a lot of creative cuts, finally got the Tribeam assembled.',
-    image: img16,
-  },
-  {
-    date: new Date('2025-09-12'),
-    title: 'Birthday TABs',
-    body: 'My birthday present \u2014 TABs for the treehouse! What more could I ask for?',
-    image: img15,
+    id: 'tribeam',
+    label: 'Tribeam',
+    shortLabel: 'Tribeam',
+    description: 'The TABs, the Tribeam, and the first climb.',
+    updates: [
+      { date: new Date('2025-11-08'), title: 'First one up', body: 'Teddy\'s the first one up on the Tribeam.', image: img19 },
+      { date: new Date('2025-11-08'), title: 'Installing the TAB', body: 'Me, Tristan, and Dave using every ounce of leverage we can manage to get the TAB installed.', image: img18 },
+      { date: new Date('2025-10-26'), title: 'Triangle brace', body: 'Triangle brace frame laid out and test-fitted.', image: img17 },
+      { date: new Date('2025-10-05'), title: 'Tribeam assembled', body: 'After a lot of creative cuts, finally got the Tribeam assembled.', image: img16 },
+      { date: new Date('2025-09-12'), title: 'Birthday TABs', body: 'My birthday present \u2014 TABs for the treehouse! What more could I ask for?', image: img15 },
+    ],
   },
 ];
+
+const shelfEntries = milestones.map((m) => ({
+  id: m.id,
+  label: m.label,
+  shortLabel: m.shortLabel,
+}));
 ---
 
 <BaseLayout>
@@ -183,29 +115,40 @@ const updates: Update[] = [
     <h1>The Treehouse Project</h1>
     <p class='intro'>A backyard build, documented as it happens.</p>
 
-    <div class='timeline'>
-      {
-        updates.map((update) => (
-          <div class='update'>
-            <div class='update-date'>
-              <FormattedDate date={update.date} />
+    <div class='treehouse-timeline' data-timeline-mode='treehouse'>
+      <TimelineShelf entries={shelfEntries} />
+
+      <div class='milestone-content'>
+        {milestones.map((milestone) => (
+          <section class='milestone' id={milestone.id} data-milestone-id={milestone.id}>
+            <h2 class='milestone-title'>{milestone.label}</h2>
+            <p class='milestone-description'>{milestone.description}</p>
+
+            <div class='milestone-updates'>
+              {milestone.updates.map((update) => (
+                <div class='update'>
+                  <div class='update-date'>
+                    <FormattedDate date={update.date} />
+                  </div>
+                  <h3>{update.title}</h3>
+                  {update.image && (
+                    <Image src={update.image} alt={update.title} width={720} loading='lazy' />
+                  )}
+                  <p>{update.body}</p>
+                </div>
+              ))}
             </div>
-            <h3>{update.title}</h3>
-            {update.image && (
-              <Image
-                src={update.image}
-                alt={update.title}
-                width={720}
-                loading='lazy'
-              />
-            )}
-            <p>{update.body}</p>
-          </div>
-        ))
-      }
+          </section>
+        ))}
+      </div>
     </div>
   </article>
 </BaseLayout>
+
+<script>
+  import { initTreehouseShelf } from '../scripts/treehouse-shelf';
+  document.addEventListener('astro:page-load', initTreehouseShelf);
+</script>
 
 <style>
   .treehouse {
@@ -216,7 +159,30 @@ const updates: Update[] = [
     font-size: 1.1em;
     margin-bottom: 2em;
   }
-  .timeline {
+  .milestone-content {
+    padding-top: 1em;
+  }
+  .milestone {
+    margin-bottom: 3em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 5em;
+  }
+  .milestone:last-child {
+    border-bottom: none;
+  }
+  .milestone-title {
+    font-size: 1.6em;
+    color: var(--accent);
+    margin-bottom: 0.2em;
+  }
+  .milestone-description {
+    color: var(--text-secondary);
+    font-size: 0.95em;
+    margin-bottom: 1.5em;
+    font-style: italic;
+  }
+  .milestone-updates {
     border-left: 2px solid var(--border);
     padding-left: 1.5em;
     margin-left: 0.5em;

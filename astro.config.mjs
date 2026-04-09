@@ -24,7 +24,7 @@ export default defineConfig({
     sitemap(),
     icon({
       include: {
-        mdi: ['github', 'linkedin', 'rss'],
+        mdi: ['github', 'linkedin', 'rss', 'history', 'open-in-new'],
         'simple-icons': ['bluesky'],
       },
     }),
