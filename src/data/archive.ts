@@ -11,6 +11,7 @@ export const eras: ArchiveEra[] = [
 		id: 'era-0',
 		eraNumber: 0,
 		date: new Date('2018-10-05'),
+		endDate: new Date('2019-02-06'),
 		title: 'The FTP Era',
 		description:
 			"Where it all started. Hand-written HTML and CSS, uploaded to Bluehost via FTP. Zilla Slab font, red links, and a lamp banner header. Ed's Bootcamp Blog.",
@@ -34,7 +35,7 @@ export const eras: ArchiveEra[] = [
 		id: 'era-1',
 		eraNumber: 1,
 		date: new Date('2019-02-06'),
-		endDate: new Date('2019-08-01'),
+		endDate: new Date('2019-11-01'),
 		title: 'React + Rails',
 		description:
 			'Full-stack rebuild with a React frontend and Rails API. Had its own login system and a live-preview article editor. Deployed across Netlify and Heroku.',
@@ -100,7 +101,7 @@ export const eras: ArchiveEra[] = [
 		id: 'era-3',
 		eraNumber: 3,
 		date: new Date('2021-06-24'),
-		endDate: new Date('2023-12-31'),
+		endDate: new Date('2024-01-01'),
 		title: 'Dark Mode Gatsby',
 		description:
 			'Complete rewrite to Gatsby v3 with a dark theme. CSS Modules, VSCode-based syntax highlighting, Times serif font. Cut dependencies from 28 to 16.',

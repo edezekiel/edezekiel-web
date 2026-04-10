@@ -48,4 +48,15 @@ describe('archive eras', () => {
 			expect(eras[i].eraNumber).toBe(i);
 		}
 	});
+
+	it('each completed era ends when the next era begins', () => {
+		for (let i = 0; i < eras.length - 1; i++) {
+			expect(
+				eras[i].endDate?.getTime(),
+				`${eras[i].id} should end when ${eras[i + 1].id} begins`,
+			).toBe(eras[i + 1].date.getTime());
+		}
+
+		expect(eras[eras.length - 1].endDate).toBeUndefined();
+	});
 });
