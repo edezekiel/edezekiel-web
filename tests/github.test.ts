@@ -18,14 +18,13 @@ describe('getRepoStats', () => {
 		vi.unstubAllGlobals();
 	});
 
-	it('maps stars and push date by repo', async () => {
+	it('maps push date by repo', async () => {
 		vi.stubGlobal(
 			'fetch',
-			vi.fn(async () => Response.json({ stargazers_count: 3, pushed_at: '2024-04-01T14:29:59Z' })),
+			vi.fn(async () => Response.json({ pushed_at: '2024-04-01T14:29:59Z' })),
 		);
 		const stats = await getRepoStats(['edezekiel/ngx-unit-test']);
 		expect(stats.get('edezekiel/ngx-unit-test')).toEqual({
-			stars: 3,
 			pushedAt: new Date('2024-04-01T14:29:59Z'),
 		});
 	});
@@ -35,7 +34,7 @@ describe('getRepoStats', () => {
 			'fetch',
 			vi.fn(async (url: string) =>
 				url.endsWith('/ok')
-					? Response.json({ stargazers_count: 0, pushed_at: '2026-01-01T00:00:00Z' })
+					? Response.json({ pushed_at: '2026-01-01T00:00:00Z' })
 					: new Response('rate limited', { status: 403 }),
 			),
 		);

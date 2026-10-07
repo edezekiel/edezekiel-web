@@ -24,10 +24,9 @@ const updated = stats ? formatUpdated(stats.pushedAt) : project.lastUpdated;
     {project.name}
   </a>
   <span class='project-desc'>{project.description}</span>
-  {(updated || stats?.stars || project.npm) && (
+  {(updated || project.npm) && (
     <span class='project-meta'>
       {updated && <span>Updated {updated}</span>}
-      {stats?.stars ? <span aria-label={`${stats.stars} GitHub stars`}>★ {stats.stars}</span> : null}
       {project.npm && (
         <a href={project.npm} target='_blank' rel='noopener' class='npm-link'>
           npm ↗
