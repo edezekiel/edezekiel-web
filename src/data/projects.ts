@@ -4,7 +4,6 @@ export interface Project {
 	description: string;
 	url: string;
 	npm?: string;
-	/** GitHub `owner/name`, used to fetch stars and last push date at build time. */
 	repo?: string;
 	internal?: boolean;
 	tags: string[];
