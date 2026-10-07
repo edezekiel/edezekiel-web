@@ -24,6 +24,27 @@ import img21 from '../assets/treehouse/21-footing-holes.jpg';
 import img22 from '../assets/treehouse/22-ace-mixing-concrete.jpg';
 import img24 from '../assets/treehouse/24-setting-post-holes.jpg';
 import img25 from '../assets/treehouse/25-ace-tube-form.jpg';
+import img26 from '../assets/treehouse/26-treehouse-complete.jpg';
+import img27 from '../assets/treehouse/27-the-whole-crew.jpg';
+import img28 from '../assets/treehouse/28-first-playdate.jpg';
+import img29 from '../assets/treehouse/29-me-teddy-ace-on-deck.jpg';
+import img30 from '../assets/treehouse/30-roof-sheathing.jpg';
+import img33 from '../assets/treehouse/33-porch-railings.jpg';
+import img34 from '../assets/treehouse/34-yard-cut-station.jpg';
+import img36 from '../assets/treehouse/36-ladder-installed.jpg';
+import img37 from '../assets/treehouse/37-helper-with-drill.jpg';
+import img38 from '../assets/treehouse/38-porch-posts.jpg';
+import img39 from '../assets/treehouse/39-siding-front.jpg';
+import img40 from '../assets/treehouse/40-siding-and-porch.jpg';
+import img41 from '../assets/treehouse/41-door-hung.jpg';
+import img42 from '../assets/treehouse/42-window-flashing.jpg';
+import img44 from '../assets/treehouse/44-door-and-trim.jpg';
+import img45 from '../assets/treehouse/45-roof-and-window.jpg';
+import img47 from '../assets/treehouse/47-selfie-by-sheathing.jpg';
+import img48 from '../assets/treehouse/48-rafters-and-door-opening.jpg';
+import img50 from '../assets/treehouse/50-build-day-helper.jpg';
+import img51 from '../assets/treehouse/51-sheathing-going-on.jpg';
+import img52 from '../assets/treehouse/52-wall-frames-up.jpg';
 import FormattedDate from '../components/FormattedDate.astro';
 import TimelineShelf from '../components/TimelineShelf.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -46,15 +67,155 @@ interface Milestone {
 // Milestones in reverse chronological order (most recent first)
 const milestones: Milestone[] = [
 	{
+		id: 'complete',
+		label: 'Complete',
+		shortLabel: 'Complete',
+		description: 'Treehouse complete!',
+		updates: [
+			{
+				date: new Date('2026-06-22'),
+				title: 'Treehouse complete!',
+				body: 'Siding painted, railings on, ladder in, bunting hung. Teddy and Ace are officially moved in.',
+				image: img26,
+			},
+			{
+				date: new Date('2026-06-27'),
+				title: 'The whole crew',
+				body: 'Family and friends up on the deck to celebrate the finished build.',
+				image: img27,
+			},
+			{
+				date: new Date('2026-06-22'),
+				title: 'First playdate',
+				body: 'Hot Wheels track down, camp chairs set up, and a full house of kids inside.',
+				image: img28,
+			},
+			{
+				date: new Date('2026-06-27'),
+				title: 'Me and my builders',
+				body: 'Teddy and Ace on the deck with me. It was a good day to build a treehouse.',
+				image: img29,
+			},
+		],
+	},
+	{
 		id: 'house',
 		label: 'House',
 		shortLabel: 'House',
-		description: 'Walls going up. Starting to look like a real structure.',
+		description: 'Walls, roof, siding, door, porch, and ladder.',
 		updates: [
+			{
+				date: new Date('2026-06-20'),
+				title: 'Railings up',
+				body: 'Porch railings done. Just about ready for the crew.',
+				image: img33,
+			},
+			{
+				date: new Date('2026-06-20'),
+				title: 'Cut station',
+				body: 'Miter saw set up on the lawn to cut the porch railing pieces.',
+				image: img34,
+			},
+			{
+				date: new Date('2026-06-19'),
+				title: 'Ladder in',
+				body: 'Ladder built and attached, railing posts going up around the porch.',
+				image: img36,
+			},
+			{
+				date: new Date('2026-06-19'),
+				title: 'Little helper',
+				body: 'Drill in hand, ready to help finish the ladder.',
+				image: img37,
+			},
+			{
+				date: new Date('2026-06-19'),
+				title: 'Porch posts',
+				body: 'Posts bolted to the porch framing for the railings.',
+				image: img38,
+			},
+			{
+				date: new Date('2026-06-15'),
+				title: 'Siding on',
+				body: 'Siding up and painted. It finally looks like a house.',
+				image: img39,
+			},
+			{
+				date: new Date('2026-06-15'),
+				title: 'Porch taking shape',
+				body: 'Porch framing extended toward the trunk, door primed.',
+				image: img40,
+			},
+			{
+				date: new Date('2026-06-11'),
+				title: 'Door hung',
+				body: 'Board-and-batten door hung and the opening flashed.',
+				image: img41,
+			},
+			{
+				date: new Date('2026-06-11'),
+				title: 'Window flashing',
+				body: 'Window taped in with ZIP flashing tape.',
+				image: img42,
+			},
+			{
+				date: new Date('2026-06-10'),
+				title: 'Door and trim',
+				body: 'Built the door and trim frame on the driveway.',
+				image: img44,
+			},
+			{
+				date: new Date('2026-06-07'),
+				title: 'Roof framed',
+				body: 'Fascia on, window in, door opening framed.',
+				image: img45,
+			},
+			{
+				date: new Date('2026-06-07'),
+				title: 'Roof decking',
+				body: 'ZIP panels on the roof, tucked up under the magnolia branches.',
+				image: img30,
+			},
+			{
+				date: new Date('2026-06-06'),
+				title: 'Sheathing crew',
+				body: 'Taking a quick break in front of the fresh sheathing.',
+				image: img47,
+			},
+			{
+				date: new Date('2026-05-01'),
+				title: 'Rafters on',
+				body: 'Rafters set and the door opening framed out.',
+				image: img48,
+			},
+			{
+				date: new Date('2026-05-01'),
+				title: 'Build day',
+				body: 'Good company on build day.',
+				image: img50,
+			},
+			{
+				date: new Date('2026-04-26'),
+				title: 'Sheathing going on',
+				body: 'ZIP panels going up on the walls.',
+				image: img51,
+			},
+			{
+				date: new Date('2026-04-26'),
+				title: 'Walls framed',
+				body: 'All four wall frames up and braced, first ZIP panel in place.',
+				image: img52,
+			},
+			{
+				date: new Date('2026-04-06'),
+				title: 'Standing tall',
+				body: 'Wall frames up, braced and plumb. First time the treehouse has walls.',
+				image: img14,
+			},
 			{
 				date: new Date('2026-04-06'),
 				title: 'Walls going up',
-				body: 'Zip System sheathing on the wall frames, stairs framed out. Starting to look like a real structure.',
+				body: 'Wall frames braced in place, seen from the deck.',
 				image: img07,
 			},
 			{
@@ -62,12 +223,6 @@ const milestones: Milestone[] = [
 				title: 'Raising the walls',
 				body: 'Me, Greg, and Dave lifting the first wall frame into place on the platform.',
 				image: img13,
-			},
-			{
-				date: new Date('2026-04-06'),
-				title: 'Standing tall',
-				body: 'Wall frames up, braced and plumb. First time the treehouse has walls.',
-				image: img14,
 			},
 		],
 	},
@@ -78,34 +233,10 @@ const milestones: Milestone[] = [
 		description: 'Platform framed, decked, and claimed by the crew.',
 		updates: [
 			{
-				date: new Date('2026-03-25'),
-				title: 'Deck boards down',
-				body: 'Platform is fully decked. Solid footing up in the tree now.',
-				image: img06,
-			},
-			{
 				date: new Date('2026-03-22'),
-				title: 'Platform framing',
-				body: 'Farley and Ace helping to install the platform joists.',
-				image: img05,
-			},
-			{
-				date: new Date('2026-03-22'),
-				title: 'First one up',
-				body: 'Celebrating on the beam frame. The platform is real.',
-				image: img08,
-			},
-			{
-				date: new Date('2026-03-22'),
-				title: 'Kids claim the deck',
-				body: 'Deck boards barely down and Teddy and Ace are already up here.',
-				image: img09,
-			},
-			{
-				date: new Date('2026-03-22'),
-				title: 'Teaching the tools',
-				body: "Showing Teddy how to drive screws. He's a natural.",
-				image: img10,
+				title: 'Family on the platform',
+				body: 'Me, Teddy, and Ace on the deck for the first time.',
+				image: img12,
 			},
 			{
 				date: new Date('2026-03-22'),
@@ -115,9 +246,33 @@ const milestones: Milestone[] = [
 			},
 			{
 				date: new Date('2026-03-22'),
-				title: 'Family on the platform',
-				body: 'Me, Teddy, and Ace on the deck for the first time.',
-				image: img12,
+				title: 'Teaching the tools',
+				body: "Showing Teddy how to drive screws. He's a natural.",
+				image: img10,
+			},
+			{
+				date: new Date('2026-03-22'),
+				title: 'Kids claim the deck',
+				body: 'Deck boards barely down and Teddy and Ace are already up here.',
+				image: img09,
+			},
+			{
+				date: new Date('2026-03-22'),
+				title: 'Platform framing',
+				body: 'Farley and Ace helping to install the platform joists.',
+				image: img05,
+			},
+			{
+				date: new Date('2026-03-22'),
+				title: 'On top of it',
+				body: 'Celebrating up on the new platform. It is real.',
+				image: img08,
+			},
+			{
+				date: new Date('2026-03-22'),
+				title: 'First deck boards',
+				body: 'First few deck boards screwed down on the platform frame.',
+				image: img06,
 			},
 			{
 				date: new Date('2026-03-21'),
@@ -141,9 +296,9 @@ const milestones: Milestone[] = [
 			},
 			{
 				date: new Date('2025-11-16'),
-				title: 'Setting post holes',
-				body: 'Ace and me setting the post holes.',
-				image: img24,
+				title: 'Concrete in pajamas',
+				body: 'Ace mixing concrete in her pajamas. Committed to the cause.',
+				image: img22,
 			},
 			{
 				date: new Date('2025-11-16'),
@@ -153,15 +308,15 @@ const milestones: Milestone[] = [
 			},
 			{
 				date: new Date('2025-11-16'),
-				title: 'Concrete in pajamas',
-				body: 'Ace mixing concrete in her pajamas. Committed to the cause.',
-				image: img22,
+				title: 'Setting post holes',
+				body: 'Ace and me setting the post holes.',
+				image: img24,
 			},
 			{
 				date: new Date('2025-11-09'),
-				title: 'Measuring up',
-				body: 'Leveling the first beam. String line from the tree to figure out the right height.',
-				image: img01,
+				title: 'Footing holes',
+				body: 'Footing holes dug. Three piers to support the platform.',
+				image: img21,
 			},
 			{
 				date: new Date('2025-11-09'),
@@ -171,9 +326,9 @@ const milestones: Milestone[] = [
 			},
 			{
 				date: new Date('2025-11-09'),
-				title: 'Footing holes',
-				body: 'Footing holes dug. Three piers to support the platform.',
-				image: img21,
+				title: 'Measuring up',
+				body: 'Leveling the first beam. String line from the tree to figure out the right height.',
+				image: img01,
 			},
 		],
 	},

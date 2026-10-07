@@ -17,7 +17,7 @@ export const projects: Project[] = [
 		url: '/treehouse',
 		internal: true,
 		tags: ['woodworking'],
-		lastUpdated: 'Apr 6',
+		lastUpdated: 'Jun 27',
 	},
 	{
 		name: 'openvex-js',
