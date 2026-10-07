@@ -9,8 +9,7 @@ export async function GET(context) {
 		description: SITE_DESCRIPTION,
 		site: context.site,
 		items: posts
-			.slice()
-			.reverse()
+			.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 			.map((post) => ({
 				...post.data,
 				link: `/blog/${post.id}/`,

@@ -10,7 +10,7 @@ Personal site and blog for Ed Ezekiel — [edezekiel.com](https://edezekiel.com)
 - **Language:** TypeScript
 - **Linting/Formatting:** Biome (`npm run lint`, `npm run format`)
 - **CI:** GitHub Actions — typecheck, lint, build on push/PR to main
-- **Deployment:** Netlify
+- **Deployment:** Cloudflare Pages
 
 ## Key Directories
 
