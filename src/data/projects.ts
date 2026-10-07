@@ -4,6 +4,7 @@ export interface Project {
 	description: string;
 	url: string;
 	npm?: string;
+	repo?: string;
 	internal?: boolean;
 	tags: string[];
 	lastUpdated?: string;
@@ -22,15 +23,19 @@ export const projects: Project[] = [
 	{
 		name: 'openvex-js',
 		emoji: '🛡️',
-		description: 'JavaScript library for creating and managing OpenVEX documents',
+		description: 'TypeScript library for creating and managing OpenVEX documents',
 		url: 'https://github.com/edezekiel/openvex-js',
+		npm: 'https://www.npmjs.com/package/openvex-js',
+		repo: 'edezekiel/openvex-js',
 		tags: ['security', 'vex'],
 	},
 	{
 		name: 'inject-mocks',
 		emoji: '🧪',
 		description: 'Simplify Angular unit testing with automatic mock injection',
-		url: 'https://www.npmjs.com/package/@ngx-unit-test/inject-mocks',
+		url: 'https://github.com/edezekiel/ngx-unit-test',
+		npm: 'https://www.npmjs.com/package/@ngx-unit-test/inject-mocks',
+		repo: 'edezekiel/ngx-unit-test',
 		tags: ['angular', 'testing'],
 	},
 	{
@@ -39,6 +44,7 @@ export const projects: Project[] = [
 		description: 'CLI and Node.js library to parse and query SSH config files',
 		url: 'https://github.com/edezekiel/get-ssh-config',
 		npm: 'https://www.npmjs.com/package/get-ssh-config',
+		repo: 'edezekiel/get-ssh-config',
 		tags: ['cli', 'npm'],
 	},
 	{
@@ -46,6 +52,7 @@ export const projects: Project[] = [
 		emoji: '📅',
 		description: 'Robust date parsing that avoids common JavaScript Date pitfalls',
 		url: 'https://github.com/edezekiel/safe-date-parse',
+		repo: 'edezekiel/safe-date-parse',
 		tags: ['utility'],
 	},
 	{
@@ -53,6 +60,7 @@ export const projects: Project[] = [
 		emoji: '⚙️',
 		description: 'Personal development environment configuration and setup scripts',
 		url: 'https://github.com/edezekiel/dotfiles',
+		repo: 'edezekiel/dotfiles',
 		tags: ['devtools'],
 	},
 ];

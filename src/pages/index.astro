@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import { getRepoStats } from '../data/github';
 import { projects } from '../data/projects';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -9,6 +10,8 @@ const recentPosts = (await getCollection('blog'))
 	.filter((p) => p.data.pubDate)
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 5);
+
+const repoStats = await getRepoStats(projects.flatMap((p) => (p.repo ? [p.repo] : [])));
 ---
 
 <BaseLayout>
@@ -53,7 +56,9 @@ const recentPosts = (await getCollection('blog'))
   <section class='projects'>
     <h3>Projects</h3>
     <div class='projects-grid'>
-      {projects.map((project) => <ProjectCard project={project} />)}
+      {projects.map((project) => (
+        <ProjectCard project={project} stats={project.repo ? repoStats.get(project.repo) : undefined} />
+      ))}
     </div>
   </section>
 

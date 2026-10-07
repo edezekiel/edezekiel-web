@@ -8,7 +8,7 @@ Personal site and blog at [edezekiel.com](https://edezekiel.com) — engineering
 - TypeScript
 - [Biome](https://biomejs.dev/) — linting and formatting
 - GitHub Actions CI (typecheck, lint, build)
-- Deployed via Netlify
+- Deployed via Cloudflare Pages
 
 ## Features
 
