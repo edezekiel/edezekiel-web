@@ -1,7 +1,6 @@
 <div id='nav-progress' class='nav-progress' transition:persist aria-hidden='true'></div>
 
 <script>
-	/** Shows a progress bar only when a client-side navigation outlasts the delay, so fast or prefetched swaps stay instant. */
 	const SHOW_DELAY_MS = 150;
 	let timer: ReturnType<typeof setTimeout> | undefined;
 
