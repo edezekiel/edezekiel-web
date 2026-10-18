@@ -1,19 +1,31 @@
 ---
 pubDate: 2026-10-17
-title: 'Leaving Oh My Zsh'
-description: 'Speeding up my terminal and rebuilding my Mac from one config file with mise bootstrap'
-tags: ['shell', 'tooling', 'dotfiles']
+title: 'Rebuilding My Dev Setup for Agentic Coding'
+description: 'Moving from an IDE to a terminal built around coding agents: a faster shell, new CLI tools, and rebuilding my Mac with mise bootstrap'
+tags: ['shell', 'tooling', 'dotfiles', 'ai']
 ---
 
-This post is about finally removing Oh My Zsh from my terminal after several years, and the other changes I made to my dotfiles along the way.
+This post is about updating my day-to-day developer setup to work better now that most of my coding happens through AI agents.
 
-Back in 2019 I wrote a [mac-setup](/blog/2019-08-13-mac-setup-cli) script that installed Homebrew, Oh My Zsh, nvm and a bunch of apps. Seven years later, I took Oh My Zsh and nvm back out.
+## How My Setup Got Here
 
-My dotfiles are on GitHub at [edezekiel/dotfiles](https://github.com/edezekiel/dotfiles). I keep them in a bare git repo with my home directory as the work tree, and use a `dot` alias in place of `git`.
+Before AI, my daily driver for programming was VSCode. I used the terminal for git operations, file management, running local dev servers, ssh'ing into remote servers, and some light coding with vim. I stored my developer configuration in a [dotfiles](https://github.com/edezekiel/dotfiles) repo because I wanted a smooth experience whether I was working in VSCode or the terminal.
 
-## Why Leave Oh My Zsh?
+ChatGPT changed this a bit. I still used VSCode as my IDE, but I had a chat window open a lot of the time and basically used it as a StackOverflow replacement.
 
-It started with Warp. Every time I opened a new tab, I had to wait about a second and a half before I could type. That doesn't sound like much, but I open a lot of tabs.
+In March 2025, I switched from VSCode to Cursor, and it fundamentally shifted how I code. Instead of chatting with an AI and implementing the code changes myself, I prompted Cursor to update files for me. Watching Cursor implement features across a codebase was magical. There were still lots of scenarios where coding it myself was more precise, but it felt like a big advancement over chatting and AI-assisted autocomplete.
+
+As I learned how to build harnesses around agents to improve code quality, I was able to offload more work to AI. That meant I had less need for an IDE. So, in February 2026 I cancelled my Cursor subscription and went all in on Claude Code and Codex. Now the majority of my coding time is spent either chatting with agents or hopping into a file with vim to make quick edits. I also started learning tmux to organize my terminal sessions better.
+
+Ironically, dropping Cursor brought VSCode back as a quick way to view staged code changes across multiple projects in the same workspace.
+
+This week I decided to see what it would take to rip VSCode fully out of my developer workflow.
+
+I started by eliminating some rough edges in my terminal: opening a new tab took about 1.5 seconds, I was missing some CLI tools for git operations and browsing files, and setting up a new computer still meant a Brewfile, a separate install step for CLI tools, and a lot of remembering. The rest of this post covers what I changed.
+
+## A Faster Shell
+
+Every time I opened a new tab in Warp, I had to wait about a second and a half before I could type. When most of your work happens in the terminal, that adds up quickly.
 
 So, I timed it:
 
@@ -21,9 +33,7 @@ So, I timed it:
 time zsh -i -c exit
 ```
 
-Most of the 1.5 seconds was Oh My Zsh loading its plugins and nvm sourcing itself. I was only using one Oh My Zsh plugin (`git`), and when I checked my shell history I had never actually typed any of its git aliases.
-
-## A Plain .zshrc
+Most of the 1.5 seconds was Oh My Zsh loading its plugins and nvm sourcing itself. I'd been using both since 2019, when my [mac-setup](/blog/2019-08-13-mac-setup-cli) script installed them. But I was only using one Oh My Zsh plugin (`git`), and when I checked my shell history I had never actually typed any of its git aliases.
 
 My old `.zshrc` was 142 lines long, and most of it was commented-out Oh My Zsh boilerplate. I rewrote it from scratch and ended up with about 60 lines and no framework.
 
@@ -48,6 +58,44 @@ mise goes first so the other tools can find binaries that mise installs.
 
 A new shell now starts in about 0.14 seconds. Warp runs this file every time it opens a tab, so all of this was really about making Warp feel faster. 🎉
 
+## Replacing What I Used VSCode For
+
+With the shell cleaned up, I added a few tools to cover the things I was still opening VSCode for.
+
+### Reviewing Changes: lazygit and delta
+
+The main thing VSCode was still doing for me was showing staged changes. [lazygit](https://github.com/jesseduffield/lazygit) now covers that, along with staging, branching and rebasing. I added an `lg` function that opens it and then moves my shell to whatever directory lazygit was in when I quit.
+
+[delta](https://github.com/dandavison/delta) makes git diffs much easier to read. At first I wondered if I still needed it now that I had lazygit, but they do different things: lazygit is the interface, and delta controls how the diffs look. I hooked them together so lazygit's diff panel uses delta too:
+
+```yaml
+# ~/.config/lazygit/config.yml
+git:
+  diffRenderers:
+    - colorArg: always
+      command: delta --dark --paging=never --side-by-side=false
+```
+
+One gotcha: on macOS, lazygit's default config folder is `~/Library/Application Support/lazygit`. I export `XDG_CONFIG_HOME` in `.zshrc` so it uses `~/.config/lazygit` instead, which is where my dotfiles keep it.
+
+### Browsing Files: yazi
+
+[yazi](https://yazi-rs.github.io) is a file browser for the terminal, and it fills in for VSCode's file explorer. Similar to `lg`, typing `y` opens it and changes directory when I exit. Inside yazi, `Ctrl+G` opens lazygit in the current folder. To get yazi's image previews working inside tmux, I had to add `set -g allow-passthrough on` to my `.tmux.conf`.
+
+### Moving Between Projects: zoxide
+
+Since I jump between a lot of repos, [zoxide](https://github.com/ajeetdsouza/zoxide) was a big one. It replaces `cd`. Normal paths work exactly like before, but I can also type part of a directory name I've visited before and jump straight there from anywhere. zoxide learns as you use it, so on the first day I seeded it with all of my repos:
+
+```sh
+find ~/dev -maxdepth 3 -name .git | sed 's|/\.git$||' | xargs -n1 zoxide add
+```
+
+### The Prompt and Aliases
+
+[starship](https://starship.rs) replaced the Oh My Zsh prompt theme. I kept the defaults and only turned off two modules that showed up on every single prompt without telling me anything useful.
+
+I also added a few aliases based on what I actually type the most. `g` for `git` was the obvious one, since git was by far my most used command. I also added `h`, which just prints out all my aliases, because I knew I would forget them.
+
 ## Setting Up a New Mac With mise bootstrap
 
 My favorite part of this project was moving my machine setup into mise bootstrap.
@@ -64,7 +112,7 @@ Homebrew packages go in a `[bootstrap.packages]` section:
 "brew-cask:font-hack-nerd-font" = "latest"
 ```
 
-mise bootstrap can also write files. I use that for a pre-commit hook in the dotfiles repo. Since it's a bare repo, the hook lives inside `~/dotfiles/hooks`, which git can't track itself:
+My dotfiles live in a bare git repo with my home directory as the work tree, and I use a `dot` alias in place of `git` for them. mise bootstrap can also write files, and I use that for a pre-commit hook in that repo. Since it's a bare repo, the hook lives inside `~/dotfiles/hooks`, which git can't track itself:
 
 ```toml
 [bootstrap.files."~/dotfiles/hooks/pre-commit"]
@@ -149,36 +197,6 @@ The big numbers are key codes (`0x700000039` is Caps Lock and `0x7000000E4` is C
 defaults -currentHost read -g | grep -A12 modifiermapping
 ```
 
-## New Terminal Tools
-
-With the shell cleaned up, I added a few tools I'd been meaning to try.
-
-[starship](https://starship.rs) replaced the Oh My Zsh prompt theme. I kept the defaults and only turned off two modules that showed up on every single prompt without telling me anything useful.
-
-[lazygit](https://github.com/jesseduffield/lazygit) handles staging, branching and rebasing. I added an `lg` function that opens it and then moves my shell to whatever directory lazygit was in when I quit.
-
-[yazi](https://yazi-rs.github.io) is a file browser for the terminal. Similar to `lg`, typing `y` opens it and changes directory when I exit. Inside yazi, `Ctrl+G` opens lazygit in the current folder.
-
-[delta](https://github.com/dandavison/delta) makes git diffs much easier to read. At first I wondered if I still needed it now that I had lazygit, but they do different things: lazygit is the interface, and delta controls how the diffs look. I hooked them together so lazygit's diff panel uses delta too:
-
-```yaml
-# ~/.config/lazygit/config.yml
-git:
-  diffRenderers:
-    - colorArg: always
-      command: delta --dark --paging=never --side-by-side=false
-```
-
-One gotcha: on macOS, lazygit's default config folder is `~/Library/Application Support/lazygit`. I export `XDG_CONFIG_HOME` in `.zshrc` so it uses `~/.config/lazygit` instead, which is where my dotfiles keep it.
-
-[zoxide](https://github.com/ajeetdsouza/zoxide) replaces `cd`. Normal paths work exactly like before, but I can also type part of a directory name I've visited before and jump straight there from anywhere. zoxide learns as you use it, so on the first day I seeded it with all of my repos:
-
-```sh
-find ~/dev -maxdepth 3 -name .git | sed 's|/\.git$||' | xargs -n1 zoxide add
-```
-
-I also added a few aliases based on what I actually type the most. `g` for `git` was the obvious one, since git was by far my most used command. I also added `h`, which just prints out all my aliases, because I knew I would forget them.
-
 ## Trying Out Ghostty
 
 While I was rethinking my terminal setup, I spent a day using [Ghostty](https://ghostty.org). It's fast and the config file is nice to work with. I even set up the Catppuccin theme across Ghostty, tmux, starship, lazygit and yazi so everything matched.
@@ -203,4 +221,4 @@ honor_ps1 = true
 
 ## Conclusion
 
-I'm really happy with how this turned out. My terminal feels noticeably faster, and for the first time I have a setup I could rebuild on a new machine without digging through old notes. If startup time ever creeps back up, `time zsh -i -c exit` is the first thing I'll check.
+My terminal now opens a new tab almost instantly, lazygit and delta cover reviewing changes, yazi and zoxide cover moving around files and projects, and I can rebuild the whole setup on a new machine from my dotfiles. Those were the things I was still opening VSCode for. If startup time ever creeps back up, `time zsh -i -c exit` is the first thing I'll check.
