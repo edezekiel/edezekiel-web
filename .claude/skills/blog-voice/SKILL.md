@@ -91,7 +91,7 @@ List anything that could not be verified, and say why, rather than leaving it in
 
 ### 3. Line edit in Ed's voice
 
-Reread the post against the reference posts above and ask: would Ed have written this sentence? If a sentence is cleverer, tighter or more quotable than anything in his past posts, rewrite it plainer. Remove anything on the "What to avoid" list. Fix typos and grammar, but keep his casual phrasing (a "So," at the start of a sentence, contractions) rather than polishing it out.
+Run the `blog-voice-edit` skill (`.claude/skills/blog-voice-edit/`). It goes sentence by sentence against the reference posts and the "What to avoid" list above, without changing facts or structure.
 
 ### 4. Report
 

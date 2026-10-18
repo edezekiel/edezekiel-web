@@ -50,7 +50,7 @@ A new shell now starts in about 0.14 seconds. Warp runs this file every time it 
 
 ## Setting Up a New Mac With mise bootstrap
 
-This was my favorite part of the whole project.
+My favorite part of this project was moving my machine setup into mise bootstrap.
 
 Before this, setting up a new machine meant running `brew bundle` against a Brewfile, running `mise install` for CLI tools, and then trying to remember which macOS settings I had changed. Now it all lives in one file, `~/.config/mise/config.toml`, and [mise bootstrap](https://mise.jdx.dev/bootstrap.html) applies it.
 
@@ -115,7 +115,7 @@ Bootstrap creates these as empty files if they don't exist, and the dotfiles rep
 
 ### macOS Settings and Keyboard Remaps
 
-I didn't expect this, but mise bootstrap can also set macOS preferences. These are the kinds of settings I change once in System Settings and then completely forget about until I'm staring at a new laptop wondering why the Dock won't hide:
+mise bootstrap can also set macOS preferences. These are settings I change once in System Settings and then forget about, so having them in a file means I won't have to remember them on my next computer:
 
 ```toml
 [bootstrap.macos.defaults]
@@ -179,7 +179,7 @@ While I was rethinking my terminal setup, I spent a day using [Ghostty](https://
 
 By the end of the day I had switched back to Warp. The biggest reason was tabs. Ghostty uses the normal macOS tabs across the top of the window, and I've gotten used to Warp's vertical tab sidebar. I also just liked Warp's dark theme and font better than what I had put together.
 
-Matching themes across five tools also turned out to be a lot of config for not much benefit. So, when Ghostty went, I removed all of the theming too and went back to each tool's default colors.
+Matching themes across five tools also turned out to be a lot of config for not much benefit. So, when I removed Ghostty, I also removed all of the theming and went back to each tool's default colors.
 
 ## Adding Warp to My Dotfiles
 
