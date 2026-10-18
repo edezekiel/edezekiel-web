@@ -1,0 +1,16 @@
+<script>
+	let browserAnimatedBack = false;
+
+	window.addEventListener('popstate', (event) => {
+		browserAnimatedBack =
+			(event as PopStateEvent & { hasUAVisualTransition?: boolean }).hasUAVisualTransition ??
+			window.matchMedia('(pointer: coarse)').matches;
+	});
+
+	document.addEventListener('astro:before-swap', (event) => {
+		if (event.navigationType === 'traverse' && browserAnimatedBack) {
+			event.viewTransition.skipTransition();
+		}
+		browserAnimatedBack = false;
+	});
+</script>
