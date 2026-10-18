@@ -14,6 +14,10 @@ const thirtyTwo = 32;
       <HeaderLink href='/blog'>Blog</HeaderLink>
       <HeaderLink href='/archive'>Archive</HeaderLink>
       <HeaderLink href='/about'>About</HeaderLink>
+      <HeaderLink href='/treehouse' title='The Treehouse Project'>
+        <span aria-hidden='true'>🌳</span>
+        <span class='sr-only'>Treehouse</span>
+      </HeaderLink>
     </div>
     <div class='social-links'>
       <a href='https://bsky.app/profile/edezekiel.bsky.social' target='_blank'>
@@ -121,9 +125,26 @@ const thirtyTwo = 32;
   .social-links a:hover {
     color: var(--accent-light);
   }
+  .internal-links {
+    display: flex;
+    flex-wrap: wrap;
+  }
   @media (max-width: 720px) {
     .social-links {
       display: none;
+    }
+    nav {
+      flex-wrap: wrap;
+      padding-top: 0.75em;
+    }
+    h2 {
+      width: 100%;
+    }
+    h2 a {
+      padding: 0 0.5em;
+    }
+    nav a {
+      padding: 0.6em 0.5em;
     }
   }
 </style>
