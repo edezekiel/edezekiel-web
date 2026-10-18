@@ -65,6 +65,34 @@ These are the patterns that make a draft read as machine-written. Remove them on
 - Wrapping up with a moral or a call to action he wouldn't make. His endings are modest.
 - Over-tidy symmetry: every section the same length, every list three items.
 
-## Revision pass
+## Editing pass
 
-After drafting, reread the post against the reference posts above and ask: would Ed have written this sentence? If a sentence is cleverer, tighter or more quotable than anything in his past posts, rewrite it plainer. Keep his small imperfections in spirit (casual phrasing, a "So," at the start of a sentence) rather than polishing them out.
+Run this after the first draft is done, or whenever Ed asks for an edit of an existing post. Do the technical check first, because fixing a wrong claim often changes the prose around it.
+
+### 1. Technical correctness
+
+Treat every factual claim, command and snippet as something to verify, not something to trust because it was in the draft. Check against the real source, not memory:
+
+- **Commands.** Confirm each flag and subcommand exists with the tool's own `--help` or man page. Run commands that are read-only and safe (`--version`, `--help`, `status`, `--dry-run`, queries). Never run commands that install, delete, push or change system state just to check a post; read the docs for those instead.
+- **Config snippets.** Check every key and section name against the tool's official documentation or the real config file the post describes. Make sure the snippet would parse (TOML, YAML, JSON).
+- **Claims about behaviour.** For statements like "mise reads `.nvmrc`" or "Warp reloads the file automatically", find the documentation that says so, and note any setting the claim depends on. If a claim depends on a setting the post doesn't mention, add it.
+- **Numbers, versions and dates.** Match timings, counts and version numbers to where they came from. Don't round in a way that changes meaning.
+- **Links.** Every URL must resolve (`curl -sIL -o /dev/null -w '%{http_code}' <url>`). Internal links must match a real post slug under `src/content/blog` (slugs are the lowercased filename without `.md`).
+- **Paths and names.** File paths, package names and product names must be spelled exactly as they exist.
+
+List anything that could not be verified, and say why, rather than leaving it in silently.
+
+### 2. Structure and length
+
+- Does the opening say what the post is about?
+- Does the middle follow the order things happened?
+- Cut repeated points, asides that don't serve the post, and any section that exists only for symmetry.
+- Check heading hierarchy (`##` for sections, `###` under them) and that code blocks have a language.
+
+### 3. Line edit in Ed's voice
+
+Reread the post against the reference posts above and ask: would Ed have written this sentence? If a sentence is cleverer, tighter or more quotable than anything in his past posts, rewrite it plainer. Remove anything on the "What to avoid" list. Fix typos and grammar, but keep his casual phrasing (a "So," at the start of a sentence, contractions) rather than polishing it out.
+
+### 4. Report
+
+After editing, tell Ed what changed in three short groups: technical fixes, cuts, and voice edits. Call out any claim that is still unverified.

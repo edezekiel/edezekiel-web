@@ -25,15 +25,15 @@ Most of the 1.5 seconds was Oh My Zsh loading its plugins and nvm sourcing itsel
 
 ## A Plain .zshrc
 
-My old `.zshrc` was 142 lines long, and most of it was commented-out Oh My Zsh boilerplate. I rewrote it from scratch and ended up with about 50 lines and no framework.
+My old `.zshrc` was 142 lines long, and most of it was commented-out Oh My Zsh boilerplate. I rewrote it from scratch and ended up with about 60 lines and no framework.
 
 Here's what I removed:
 
 - Oh My Zsh itself.
-- nvm. I switched to [mise](https://mise.jdx.dev) for Node and pnpm. mise reads each project's `.nvmrc`, so none of my repos had to change.
+- nvm. I switched to [mise](https://mise.jdx.dev) for Node and pnpm. With `idiomatic_version_file_enable_tools = ["node"]` in mise's settings, it reads each project's `.nvmrc`, so none of my repos had to change.
 - Some leftover `PNPM_HOME` lines and duplicate PATH entries from old installers.
 
-I also switched `compinit` to `compinit -C` so zsh reuses its completion cache instead of rescanning on every shell.
+I also switched `compinit` to `compinit -C`, which skips checking for new completion functions and reuses the cached completion file.
 
 What's left is history settings, completion, PATH, a few aliases, and these tool hooks:
 
@@ -137,7 +137,7 @@ value = [
 ]
 ```
 
-The big numbers are key codes (`0x700000039` is Caps Lock and `0x7000000E4` is Control). The remaps take effect after logging out or unplugging the keyboard. To find the current values on a machine, I ran:
+The big numbers are key codes (`0x700000039` is Caps Lock and `0x7000000E4` is Control). After bootstrap writes them, the remaps may not kick in until you log out or reconnect the keyboard. To find the current values on a machine, I ran:
 
 ```sh
 defaults -currentHost read -g | grep -A12 modifiermapping
@@ -163,7 +163,7 @@ git:
       command: delta --dark --paging=never --side-by-side=false
 ```
 
-One gotcha: on macOS, lazygit looks for its config in `~/Library/Application Support` unless `XDG_CONFIG_HOME` is set, so I export that in `.zshrc`.
+One gotcha: on macOS, lazygit's default config folder is `~/Library/Application Support/lazygit`. I export `XDG_CONFIG_HOME` in `.zshrc` so it uses `~/.config/lazygit` instead, which is where my dotfiles keep it.
 
 [zoxide](https://github.com/ajeetdsouza/zoxide) replaces `cd`. Normal paths work exactly like before, but I can also type part of a directory name I've visited before and jump straight there from anywhere. zoxide learns as you use it, so on the first day I seeded it with all of my repos:
 
