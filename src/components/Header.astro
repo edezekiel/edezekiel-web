@@ -121,9 +121,27 @@ const thirtyTwo = 32;
   .social-links a:hover {
     color: var(--accent-light);
   }
+  .internal-links {
+    display: flex;
+    flex-wrap: wrap;
+  }
   @media (max-width: 720px) {
     .social-links {
       display: none;
+    }
+    /* Title on its own row, links on one compact row below it */
+    nav {
+      flex-wrap: wrap;
+      padding-top: 0.75em;
+    }
+    h2 {
+      width: 100%;
+    }
+    h2 a {
+      padding: 0 0.5em;
+    }
+    nav a {
+      padding: 0.6em 0.5em;
     }
   }
 </style>
