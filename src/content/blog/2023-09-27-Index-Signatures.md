@@ -5,8 +5,6 @@ description: 'A Deep Dive into Index Signatures and Their Quirks'
 tags: ['typescript']
 ---
 
-_This post was originally published on the [HeroDevs blog](https://www.herodevs.com/blog-posts/typescripts-unsung-hero-index-signatures)._
-
 Index signatures are one of TypeScript’s heroes. They enable features like Mapped Types, utilities like Record and Pick, and generic types like Dictionaries.
 
 But like any good hero, index signatures have some quirks. If you’ve [seen this error](https://stackoverflow.com/questions/65799316/why-cant-an-interface-be-assigned-to-recordstring-unknown) before you know what I mean:

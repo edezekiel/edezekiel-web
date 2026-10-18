@@ -5,8 +5,6 @@ description: 'Bridging the gap between constructor-based DI and inject-based DI 
 tags: ['angular', 'testing']
 ---
 
-_This post was originally published on the [HeroDevs blog](https://www.herodevs.com/blog-posts/unit-testing-in-angular-15-without-testbed)._
-
 Angular 14 introduced the ability to use the [inject](https://angular.io/api/core/inject#inject) function in classes like components, directives, and pipes. Library authors have [embraced this feature](https://github.com/ngrx/platform/discussions/3796) and many have dropped constructor-based Dependency Injection (’DI’). It also inspired a reusable functions called [DI Functions](https://netbasal.com/unleash-the-power-of-di-functions-in-angular-2eb9f2697d66).
 
 There are [lots of approaches using TestBed](https://dev.to/this-is-angular/testing-and-faking-angular-dependencies-p9i) that allow to you test and even mock dependencies provided by the Inject function.

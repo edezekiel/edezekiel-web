@@ -5,8 +5,6 @@ description: 'Angular 16 finally quenches our thirst for this feature that revol
 tags: ['angular']
 ---
 
-_This post was originally published on the [HeroDevs blog](https://www.herodevs.com/blog-posts/revolutionize-your-angular-ssr-experience-with-non-destructive-hydration)._
-
 [Angular 16](https://github.com/angular/angular/blob/main/CHANGELOG.md#1600-rc0-2023-04-12)’s release candidate introduces a [long-awaited feature](https://github.com/angular/angular/issues/13446) that will revolutionize the Angular SSR experience: **non-destructive hydration**.
 
 This feature has the potential to [improve Core Web Vitals scores](https://twitter.com/mgechev/status/1643324830761259008?t=estNUMQ1tPCF9UYQEVF7aQ&s=19), [increase SEO performance](https://blog.angular-university.io/angular-universal/), and even get rid of the dreaded ‘flicker’ from Angular Universal applications. The Angular team recently confirmed that improving Server Side Rendering is a [top priority in 2023](https://blog.angular.io/whats-next-for-server-side-rendering-in-angular-2a6f27662b67) and that non-destructive hydration is a stepping stone towards their vision for the future.

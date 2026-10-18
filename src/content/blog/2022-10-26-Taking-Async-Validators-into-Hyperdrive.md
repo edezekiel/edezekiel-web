@@ -5,8 +5,6 @@ description: 'How to save your galaxy from unhelpful forms'
 tags: ['ngrx', 'angular']
 ---
 
-_This post was originally published on the [HeroDevs blog](https://www.herodevs.com/blog-posts/taking-async-validators-into-hyperdrive)._
-
 We love forms at HeroDevs. What do we love more than forms? StarWars. This post is about both. Specifically, how to use forkJoin in an AsyncValidator for complex inputs in your quest to save the galaxy from unhelpful forms.
 
 tldr;
