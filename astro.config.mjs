@@ -6,6 +6,10 @@ import icon from 'astro-icon';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://edezekiel.com',
+	prefetch: {
+		prefetchAll: true,
+		defaultStrategy: 'viewport',
+	},
 	integrations: [
 		expressiveCode({
 			themes: ['github-dark'],

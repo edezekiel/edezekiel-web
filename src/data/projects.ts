@@ -15,7 +15,7 @@ export const projects: Project[] = [
 		name: 'The Treehouse',
 		emoji: '🌳',
 		description: 'A backyard build, documented as it happens',
-		url: '/treehouse',
+		url: '/treehouse/',
 		internal: true,
 		tags: ['woodworking'],
 		lastUpdated: 'Jun 27',
