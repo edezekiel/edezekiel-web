@@ -46,7 +46,7 @@ If the new post is about something he has written about before, read that post t
 - Code blocks carry a lot of the post. He shows the actual command or config, then a sentence on what it does.
 - Plain bulleted lists for genuinely parallel items. Bullets are full sentences, not bold labels followed by a colon.
 - Tables are rare. Prefer a short list or a sentence.
-- Posts usually end with a "Conclusion" section of two or three sentences on what he learned or how it turned out. Older posts close with "Thank you for reading!" A "Resources" list of links is common for how-to posts.
+- Posts usually end with a "Conclusion" section of two or three sentences on what he learned or how it turned out. "Thank you for reading!" shows up in some older posts but is optional; recent posts simply end on the conclusion, so don't add it by default. A "Resources" list of links is common for how-to posts.
 
 **Point of view.** "I" throughout. He talks to the reader occasionally ("If you want to dig into...", "you probably haven't installed an IDE yet") but never lectures or prescribes.
 

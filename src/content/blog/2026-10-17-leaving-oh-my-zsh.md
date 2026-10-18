@@ -198,5 +198,3 @@ honor_ps1 = true
 ## Conclusion
 
 I'm really happy with how this turned out. My terminal feels noticeably faster, and for the first time I have a setup I could rebuild on a new machine without digging through old notes. If startup time ever creeps back up, `time zsh -i -c exit` is the first thing I'll check.
-
-Thank you for reading!
