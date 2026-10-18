@@ -18,8 +18,14 @@ const repoStats = await getRepoStats(projects.flatMap((p) => (p.repo ? [p.repo] 
   <div class='hero'>
     <h1>Hi, I'm Ed Ezekiel</h1>
     <p class='tagline'>
-      Senior Engineer at <a href='https://herodevs.com/' target='_blank'>HeroDevs</a>.
-      Former attorney. Building product security tooling and AI-assisted automation.
+      <span class='nowrap'>💻 Senior Engineer at <a href='https://herodevs.com/' target='_blank'>HeroDevs</a></span> ·
+      <span class='nowrap'>👨‍👩‍👧‍👦 Husband and dad</span> ·
+      <span class='nowrap'>⚖️ Juris Doctor</span>
+    </p>
+    <p class='tagline'>
+      I work on software security at HeroDevs, including leading the rollout of our VEX endpoint and
+      patching Angular vulnerabilities. Before that I spent years building Angular applications and
+      TypeScript libraries.
     </p>
     <div class='hero-footprints'>
       <span class='hero-print'></span>
@@ -103,6 +109,9 @@ const repoStats = await getRepoStats(projects.flatMap((p) => (p.repo ? [p.repo] 
   }
   .hero h1 {
     margin-bottom: 0.3em;
+  }
+  .nowrap {
+    white-space: nowrap;
   }
   .tagline {
     font-size: 1.15em;
