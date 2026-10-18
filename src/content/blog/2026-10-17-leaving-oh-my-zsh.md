@@ -5,7 +5,7 @@ description: 'Speeding up my terminal and rebuilding my Mac from one config file
 tags: ['shell', 'tooling', 'dotfiles']
 ---
 
-This post is about finally removing Oh My Zsh from my terminal after several years, and the other changes I made to my dotfiles along the way. I'm mostly writing it for myself, so that the next time I set up a new computer I remember what I did and where everything lives.
+This post is about finally removing Oh My Zsh from my terminal after several years, and the other changes I made to my dotfiles along the way.
 
 Back in 2019 I wrote a [mac-setup](/blog/2019-08-13-mac-setup-cli) script that installed Homebrew, Oh My Zsh, nvm and a bunch of apps. Seven years later, I took Oh My Zsh and nvm back out.
 
