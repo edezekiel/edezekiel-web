@@ -1,28 +1,41 @@
 ---
 pubDate: 2026-10-17
-title: 'Leaving Oh My Zsh, and Rebuilding My Mac From One Config File'
-description: 'A plain zshrc, mise bootstrap, and a handful of terminal tools: notes for future me on the 2026 dotfiles rewrite'
+title: 'Leaving Oh My Zsh'
+description: 'Speeding up my terminal and rebuilding my Mac from one config file with mise bootstrap'
 tags: ['shell', 'tooling', 'dotfiles']
 ---
 
-In 2019 I wrote [mac-setup](/blog/2019-08-13-mac-setup-cli), a script that installed Homebrew, Oh My Zsh, nvm and a pile of apps on a new Mac. Seven years later I finally took Oh My Zsh and nvm back out.
+This post is about finally removing Oh My Zsh from my terminal after several years, and the other changes I made to my dotfiles along the way. I'm mostly writing it for myself, so that the next time I set up a new computer I remember what I did and where everything lives.
 
-The trigger was small: every new Warp tab took about a second and a half before I could type. That adds up across a day. Most of it was Oh My Zsh loading plugins and nvm sourcing itself. A new shell now starts in about 0.14 seconds.
+Back in 2019 I wrote a [mac-setup](/blog/2019-08-13-mac-setup-cli) script that installed Homebrew, Oh My Zsh, nvm and a bunch of apps. Seven years later, I took Oh My Zsh and nvm back out.
 
-While I was in there, I rebuilt how the whole machine gets set up. This post is mostly a note to myself for the next time I get a new computer, so it leans toward "what did we do and where does it live" over "why you should do this too."
+My dotfiles are on GitHub at [edezekiel/dotfiles](https://github.com/edezekiel/dotfiles). I keep them in a bare git repo with my home directory as the work tree, and use a `dot` alias in place of `git`.
 
-My dotfiles are public at [github.com/edezekiel/dotfiles](https://github.com/edezekiel/dotfiles). They live in a bare git repo with `$HOME` as the work tree, driven by a `dot` alias.
+## Why Leave Oh My Zsh?
 
-## The punchline: a plain .zshrc
+It started with Warp. Every time I opened a new tab, I had to wait about a second and a half before I could type. That doesn't sound like much, but I open a lot of tabs.
 
-The old `.zshrc` was 142 lines, most of them commented-out Oh My Zsh boilerplate. The new one is about 50, with no framework. The slow parts that went away:
+So, I timed it:
 
-- **Oh My Zsh.** I only ever used its `git` plugin, and my shell history showed I never typed any of its git aliases.
-- **nvm.** Sourcing `nvm.sh` on every shell was the single biggest cost. [mise](https://mise.jdx.dev) now provides Node and pnpm, and it reads each repo's `.nvmrc`, so nothing in my projects had to change.
-- **`PNPM_HOME` and duplicate PATH entries.** Leftovers from old installers. `typeset -U path` now drops duplicates.
-- **A full `compinit` scan.** `compinit -C` reuses the completion cache.
+```sh
+time zsh -i -c exit
+```
 
-What's left is history settings, completion, PATH, a few aliases, and four tool hooks:
+Most of the 1.5 seconds was Oh My Zsh loading its plugins and nvm sourcing itself. I was only using one Oh My Zsh plugin (`git`), and when I checked my shell history I had never actually typed any of its git aliases.
+
+## A Plain .zshrc
+
+My old `.zshrc` was 142 lines long, and most of it was commented-out Oh My Zsh boilerplate. I rewrote it from scratch and ended up with about 50 lines and no framework.
+
+Here's what I removed:
+
+- Oh My Zsh itself.
+- nvm. I switched to [mise](https://mise.jdx.dev) for Node and pnpm. mise reads each project's `.nvmrc`, so none of my repos had to change.
+- Some leftover `PNPM_HOME` lines and duplicate PATH entries from old installers.
+
+I also switched `compinit` to `compinit -C` so zsh reuses its completion cache instead of rescanning on every shell.
+
+What's left is history settings, completion, PATH, a few aliases, and these tool hooks:
 
 ```zsh
 eval "$(mise activate zsh)"
@@ -31,19 +44,17 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh --cmd cd)"
 ```
 
-mise goes first so direnv and starship see mise-managed binaries.
+mise goes first so the other tools can find binaries that mise installs.
 
-Warp runs this file for every new tab, so all of these were really Warp startup fixes. To measure:
+A new shell now starts in about 0.14 seconds. Warp runs this file every time it opens a tab, so all of this was really about making Warp feel faster. 🎉
 
-```sh
-time zsh -i -c exit
-```
+## Setting Up a New Mac With mise bootstrap
 
-## mise bootstrap: one config file for the whole machine
+This was my favorite part of the whole project.
 
-This is the part I most want future me to remember.
+Before this, setting up a new machine meant running `brew bundle` against a Brewfile, running `mise install` for CLI tools, and then trying to remember which macOS settings I had changed. Now it all lives in one file, `~/.config/mise/config.toml`, and [mise bootstrap](https://mise.jdx.dev/bootstrap.html) applies it.
 
-I used to have a `~/.Brewfile` for apps, mise's config for CLI tools, and a vague memory of which macOS settings I'd changed. Now `~/.config/mise/config.toml` declares all of it, and [`mise bootstrap`](https://mise.jdx.dev/bootstrap.html) applies it:
+Homebrew packages go in a `[bootstrap.packages]` section:
 
 ```toml
 [bootstrap.packages]
@@ -51,10 +62,9 @@ I used to have a `~/.Brewfile` for apps, mise's config for CLI tools, and a vagu
 "brew:zoxide" = "latest"
 "brew-cask:warp" = "latest"
 "brew-cask:font-hack-nerd-font" = "latest"
-# ...and the rest of the formulae and casks
 ```
 
-The bare dotfiles repo keeps its pre-commit hook and exclude list inside `~/dotfiles`, which git can't track. Bootstrap writes those too:
+mise bootstrap can also write files. I use that for a pre-commit hook in the dotfiles repo. Since it's a bare repo, the hook lives inside `~/dotfiles/hooks`, which git can't track itself:
 
 ```toml
 [bootstrap.files."~/dotfiles/hooks/pre-commit"]
@@ -65,36 +75,47 @@ exec betterleaks git --pre-commit --staged --redact --no-banner --verbose
 """
 ```
 
-That hook runs [betterleaks](https://github.com/betterleaks/betterleaks), the successor to gitleaks, on every `dot commit`. It already caught a false positive: the line `"brew-cask:1password" = "latest"` looks a lot like `password = "..."`.
+The hook runs [betterleaks](https://github.com/betterleaks/betterleaks) (the successor to gitleaks, from the same author) on every commit to make sure I don't push a secret to a public repo. It actually caught something on its first day, although it was a false positive. The line `"brew-cask:1password" = "latest"` looks a lot like `password = "..."`.
 
-A new Mac is now four steps:
+With all of that in place, setting up a new Mac comes down to these steps:
+
+1. Install Homebrew and mise
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install mise
-git clone --bare git@github.com:edezekiel/dotfiles.git $HOME/dotfiles
-/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME checkout
-mise bootstrap --dry-run && mise bootstrap
 ```
 
-`mise bootstrap status` shows drift on an existing machine, and the whole thing is safe to rerun.
+2. Clone the dotfiles and check them out into the home directory
 
-### Local overrides
+```sh
+git clone --bare git@github.com:edezekiel/dotfiles.git $HOME/dotfiles
+/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME checkout
+```
 
-Anything machine-specific sits next to a tracked file, gets included by it, and never gets committed. Bootstrap creates each one empty if it's missing, and the bare repo's `info/exclude` ignores them:
+3. Preview, then run bootstrap
 
-| Untracked file | Pulled in by |
-|---|---|
-| `~/.zshrc.local` | the end of `.zshrc` |
-| `~/.gitconfig.local` | an `[include]` in `.gitconfig` |
-| `~/.ssh/config.local` | an `Include` at the top of `.ssh/config` |
-| `~/.config/mise/conf.d/*.toml` | mise merges these with the global config |
+```sh
+mise bootstrap --dry-run
+mise bootstrap
+```
 
-The last one means a machine can have extra Homebrew packages without touching the public config.
+Bootstrap is safe to run again at any time, and `mise bootstrap status` shows what's already in place.
 
-## macOS preferences and keyboard remaps
+### Local Overrides
 
-This one surprised me. mise bootstrap can write macOS defaults, which means preferences I set once in System Settings and would never remember on a new machine are now in a file:
+Some config only makes sense on one machine. For those, I keep an untracked "local" file next to each tracked one, and the tracked file pulls it in:
+
+- `.zshrc` sources `~/.zshrc.local` at the end.
+- `.gitconfig` includes `~/.gitconfig.local`.
+- `.ssh/config` includes `~/.ssh/config.local`.
+- mise merges any `~/.config/mise/conf.d/*.toml` files with the main config, so a machine can have extra packages.
+
+Bootstrap creates these as empty files if they don't exist, and the dotfiles repo is set to ignore them.
+
+### macOS Settings and Keyboard Remaps
+
+I didn't expect this, but mise bootstrap can also set macOS preferences. These are the kinds of settings I change once in System Settings and then completely forget about until I'm staring at a new laptop wondering why the Dock won't hide:
 
 ```toml
 [bootstrap.macos.defaults]
@@ -104,7 +125,7 @@ This one surprised me. mise bootstrap can write macOS defaults, which means pref
 "com.apple.screencapture" = { location = "~/Screenshots" }
 ```
 
-It even covers keyboard remaps. I swap Caps Lock and Control on every keyboard, and Command and Option on my external ones. macOS stores those per keyboard, keyed by vendor and product id, under the current-host global domain:
+It even handles my keyboard remaps. I swap Caps Lock and Control on every keyboard, and Command and Option on my external keyboards. macOS saves these separately for each keyboard, so each one gets its own entry:
 
 ```toml
 [[bootstrap.macos.defaults_entries]]
@@ -113,27 +134,26 @@ key = "com.apple.keyboard.modifiermapping.13364-1809-0"  # Keychron B1 Pro
 host = "current"
 value = [
   { HIDKeyboardModifierMappingSrc = 30064771129, HIDKeyboardModifierMappingDst = 30064771300 },
-  # ...
 ]
 ```
 
-Those big numbers are HID usage codes: `0x700000039` is Caps Lock, `0x7000000E4` is Control. The remap applies after logging out or replugging the keyboard. The built-in keyboard's id may not match on a different Mac model, so that one might need setting by hand once.
-
-To find them on a machine:
+The big numbers are key codes (`0x700000039` is Caps Lock and `0x7000000E4` is Control). The remaps take effect after logging out or unplugging the keyboard. To find the current values on a machine, I ran:
 
 ```sh
 defaults -currentHost read -g | grep -A12 modifiermapping
 ```
 
-## Tools that earned a spot
+## New Terminal Tools
 
-**[starship](https://starship.rs)** replaces the Oh My Zsh theme. It's fast and mostly default. I turned off two modules that added noise to every prompt: the cloud profile and the `package.json` version.
+With the shell cleaned up, I added a few tools I'd been meaning to try.
 
-**[lazygit](https://github.com/jesseduffield/lazygit)** for staging, branching and rebasing. `lg` is a shell function that launches it and `cd`s to wherever lazygit was when it exited.
+[starship](https://starship.rs) replaced the Oh My Zsh prompt theme. I kept the defaults and only turned off two modules that showed up on every single prompt without telling me anything useful.
 
-**[yazi](https://yazi-rs.github.io)** for browsing files. `y` opens it and changes directory on exit. Inside yazi, `Ctrl+G` opens lazygit in the current folder and `T` opens a new Warp tab there.
+[lazygit](https://github.com/jesseduffield/lazygit) handles staging, branching and rebasing. I added an `lg` function that opens it and then moves my shell to whatever directory lazygit was in when I quit.
 
-**[delta](https://github.com/dandavison/delta)** renders diffs. It and lazygit do different jobs: lazygit is the interface, delta is how diffs look. Wiring them together makes lazygit's diff pane use delta too. Single column, since lazygit panes are narrow:
+[yazi](https://yazi-rs.github.io) is a file browser for the terminal. Similar to `lg`, typing `y` opens it and changes directory when I exit. Inside yazi, `Ctrl+G` opens lazygit in the current folder.
+
+[delta](https://github.com/dandavison/delta) makes git diffs much easier to read. At first I wondered if I still needed it now that I had lazygit, but they do different things: lazygit is the interface, and delta controls how the diffs look. I hooked them together so lazygit's diff panel uses delta too:
 
 ```yaml
 # ~/.config/lazygit/config.yml
@@ -143,30 +163,27 @@ git:
       command: delta --dark --paging=never --side-by-side=false
 ```
 
-macOS hides lazygit's config under `~/Library/Application Support` unless `XDG_CONFIG_HOME` is set, so `.zshrc` exports it.
+One gotcha: on macOS, lazygit looks for its config in `~/Library/Application Support` unless `XDG_CONFIG_HOME` is set, so I export that in `.zshrc`.
 
-**[zoxide](https://github.com/ajeetdsouza/zoxide)** replaces `cd`. Real paths work exactly as before. A bare name jumps to the best match among directories I've visited, so `cd blog` works from anywhere. It learns as you go, so on day one I seeded it with my repos:
+[zoxide](https://github.com/ajeetdsouza/zoxide) replaces `cd`. Normal paths work exactly like before, but I can also type part of a directory name I've visited before and jump straight there from anywhere. zoxide learns as you use it, so on the first day I seeded it with all of my repos:
 
 ```sh
 find ~/dev -maxdepth 3 -name .git | sed 's|/\.git$||' | xargs -n1 zoxide add
 ```
 
-A few aliases came straight out of my shell history: `g` for git, which was by far my most typed command, plus `gsw`, `glo`, `..`, and `h` to print them all.
+I also added a few aliases based on what I actually type the most. `g` for `git` was the obvious one, since git was by far my most used command. I also added `h`, which just prints out all my aliases, because I knew I would forget them.
 
-## Trying Ghostty, and staying with Warp
+## Trying Out Ghostty
 
-I spent a day on [Ghostty](https://ghostty.org). It's fast and the config file is pleasant. I set it up with Catppuccin across Ghostty, tmux, starship, lazygit and yazi.
+While I was rethinking my terminal setup, I spent a day using [Ghostty](https://ghostty.org). It's fast and the config file is nice to work with. I even set up the Catppuccin theme across Ghostty, tmux, starship, lazygit and yazi so everything matched.
 
-I went back to Warp the same day:
+By the end of the day I had switched back to Warp. The biggest reason was tabs. Ghostty uses the normal macOS tabs across the top of the window, and I've gotten used to Warp's vertical tab sidebar. I also just liked Warp's dark theme and font better than what I had put together.
 
-- **Tabs.** Ghostty only has macOS native tabs across the top. I'm used to Warp's vertical tab sidebar, and that turned out to matter more than I expected.
-- **Theme and font.** I liked Warp's dark theme and default look better than anything I put together.
+Matching themes across five tools also turned out to be a lot of config for not much benefit. So, when Ghostty went, I removed all of the theming too and went back to each tool's default colors.
 
-Theming five tools to match also turned out to be a lot of config for very little. When Ghostty went, I removed all of it. Every tool is back to its default colors and Warp supplies the look.
+## Adding Warp to My Dotfiles
 
-## Warp config in dotfiles
-
-Warp keeps its settings in `~/.warp/settings.toml` and reloads the file live, so it's tracked now:
+Warp keeps its settings in `~/.warp/settings.toml` and reloads the file automatically when it changes, so I added it to my dotfiles:
 
 ```toml
 [appearance.text]
@@ -176,10 +193,10 @@ font_name = "Hack Nerd Font Mono"
 honor_ps1 = true
 ```
 
-`honor_ps1` makes Warp show starship instead of its own prompt. The Nerd Font matters because Warp doesn't fall back to another font for icon glyphs. Without it, starship's branch and Node icons rendered as blank space.
+`honor_ps1` tells Warp to show my starship prompt instead of its own. The Nerd Font was needed because starship uses icons for things like the git branch, and Warp's default font doesn't have them. Without it, the icons just showed up as blank space.
 
-## For future me
+## Conclusion
 
-- Start from the dotfiles README, not from this post.
-- Run `mise bootstrap --dry-run` before trusting anything.
-- Startup time is the thing to watch. If `time zsh -i -c exit` creeps back over a few hundred milliseconds, find the hook that did it.
+I'm really happy with how this turned out. My terminal feels noticeably faster, and for the first time I have a setup I could rebuild on a new machine without digging through old notes. If startup time ever creeps back up, `time zsh -i -c exit` is the first thing I'll check.
+
+Thank you for reading!

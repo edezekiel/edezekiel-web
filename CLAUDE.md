@@ -37,6 +37,7 @@ npm run format     # Format with Biome
 
 - Run `npm run lint` before committing — CI enforces this
 - Blog posts go in `src/content/blog/` as Markdown files with frontmatter (title, description, pubDate, heroImage)
+- When drafting or revising a post, use the `blog-voice` skill (`.claude/skills/blog-voice/`) so it reads like Ed wrote it
 - Site constants (title, description) live in `src/consts.ts`
 - CSS uses custom properties defined in `src/styles/global.css` — respect the existing color palette
 - Tests use Vitest (`npm test`) — CI runs them before build
