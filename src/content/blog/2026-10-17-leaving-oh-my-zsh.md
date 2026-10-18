@@ -86,10 +86,10 @@ With all of that in place, setting up a new Mac comes down to these steps:
 brew install mise
 ```
 
-2. Clone the dotfiles and check them out into the home directory
+2. Clone the dotfiles and check them out into the home directory. A brand new Mac doesn't have an SSH key yet, so I clone over HTTPS (the repo is public)
 
 ```sh
-git clone --bare git@github.com:edezekiel/dotfiles.git $HOME/dotfiles
+git clone --bare https://github.com/edezekiel/dotfiles.git $HOME/dotfiles
 /usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME checkout
 ```
 
@@ -98,6 +98,12 @@ git clone --bare git@github.com:edezekiel/dotfiles.git $HOME/dotfiles
 ```sh
 mise bootstrap --dry-run
 mise bootstrap
+```
+
+4. Once I've set up an SSH key and added it to GitHub, switch the dotfiles remote to SSH so I can push
+
+```sh
+/usr/bin/git --git-dir=$HOME/dotfiles remote set-url origin git@github.com:edezekiel/dotfiles.git
 ```
 
 Bootstrap is safe to run again at any time, and `mise bootstrap status` shows what's already in place.
