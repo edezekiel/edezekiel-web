@@ -90,6 +90,24 @@ Since I jump between a lot of repos, [zoxide](https://github.com/ajeetdsouza/zox
 find ~/dev -maxdepth 3 -name .git | sed 's|/\.git$||' | xargs -n1 zoxide add
 ```
 
+### Editing: vim Everywhere
+
+Even after all of that, VSCode was still sneaking back in through git. My `.gitconfig` had `editor = code --wait`, plus VSCode as my merge and diff tool, so writing a commit message or running an interactive rebase still opened a VSCode window.
+
+I switched all three over to vim:
+
+```ini
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+	conflictStyle = zdiff3
+[diff]
+	tool = vimdiff
+```
+
+I also export `EDITOR` and `VISUAL` as `vim` in my `.zshrc`, so other tools that open an editor (gh, lazygit and yazi) use vim too.
+
 ### The Prompt and Aliases
 
 [starship](https://starship.rs) replaced the Oh My Zsh prompt theme. I kept the defaults and only turned off two modules that showed up on every single prompt without telling me anything useful.
@@ -221,4 +239,4 @@ honor_ps1 = true
 
 ## Conclusion
 
-My terminal now opens a new tab almost instantly, lazygit and delta cover reviewing changes, yazi and zoxide cover moving around files and projects, and I can rebuild the whole setup on a new machine from my dotfiles. Those were the things I was still opening VSCode for. If startup time ever creeps back up, `time zsh -i -c exit` is the first thing I'll check.
+My terminal now opens a new tab almost instantly, lazygit and delta cover reviewing changes, yazi and zoxide cover moving around files and projects, and git opens vim instead of VSCode. I can also rebuild the whole setup on a new machine from my dotfiles. That covers everything I was still using VSCode for, so it's fully out of my workflow now. If startup time ever creeps back up, `time zsh -i -c exit` is the first thing I'll check.
