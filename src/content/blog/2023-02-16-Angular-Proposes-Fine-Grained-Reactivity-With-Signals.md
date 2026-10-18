@@ -5,6 +5,8 @@ description: 'Reactivity with Signals has the potential to fundamentally change 
 tags: ['angular']
 ---
 
+_This post was originally published on the [HeroDevs blog](https://www.herodevs.com/blog-posts/angular-proposes-fine-grained-reactivity-with-signals)._
+
 Angular has [announced](https://twitter.com/angular/status/1625939902046117890) a prototype that adds a 'Signal' reactive primitive to the framework. Reactivity with Signals has the potential to fundamentally change how we write Angular applications. This post addresses a few key questions related to this proposal:
 
 1. What is Angular's current Reactivity System?

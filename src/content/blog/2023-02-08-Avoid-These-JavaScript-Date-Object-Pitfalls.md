@@ -5,6 +5,8 @@ description: 'Date quirks and modern alternatives to squash them'
 tags: ['javascript', 'typescript']
 ---
 
+_This post was originally published on the [HeroDevs blog](https://www.herodevs.com/blog-posts/web-fundamentals-avoid-these-javascript-date-object-pitfalls)._
+
 The JavaScript `Date` object is notoriously broken. Until it is replaced with a [modern alternative](https://tc39.es/proposal-temporal/docs/), frontend developers have to deal with its quirks. This post explains two quirks that every frontend developer should know **even if** you are using `TypeScript` and a date utility library like `date-fns`, `zod`, or`Day.js`.
 
 **tldr;**
