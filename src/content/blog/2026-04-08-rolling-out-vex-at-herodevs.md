@@ -65,4 +65,6 @@ It was tempting to build a custom solution for vulnerability status, but using O
 
 I also spent a lot of time on the output side, testing the feed end-to-end with Trivy and Grype to make sure it actually delivered on reducing false positives. A valid document that doesn't suppress the right alerts isn't useful. Getting both sides of the pipeline right (ergonomic input for engineers, accurate output for scanners) was what made this project interesting.
 
+HeroDevs also published an announcement about the feed, with steps for using it with Trivy and Grype: [HeroDevs Now Publishes VEX Data: Fewer False Positives, Less Noise](https://www.herodevs.com/blog-posts/herodevs-now-publishes-vex-data-fewer-false-positives-less-noise).
+
 If you want to dig into OpenVEX, start with the [spec](https://github.com/openvex/spec) and [vexctl](https://github.com/openvex/vexctl). If you want to chat about product security, I'm on [Bluesky](https://bsky.app/profile/edezekiel.bsky.social).
