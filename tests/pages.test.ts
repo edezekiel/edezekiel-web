@@ -36,7 +36,7 @@ describe('about page (/about)', () => {
 	});
 
 	it('links to the treehouse page', () => {
-		expect(source).toContain("href='/treehouse'");
+		expect(source).toContain("href='/treehouse/'");
 	});
 
 	it('mentions HeroDevs', () => {

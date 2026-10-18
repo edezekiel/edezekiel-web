@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import NavProgress from '../components/NavProgress.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
@@ -11,6 +12,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
+    <NavProgress />
     <Header />
     <main>
       <slot />

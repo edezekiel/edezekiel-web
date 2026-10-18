@@ -1,0 +1,45 @@
+<div id='nav-progress' class='nav-progress' transition:persist aria-hidden='true'></div>
+
+<script>
+	const SHOW_DELAY_MS = 150;
+	let timer: ReturnType<typeof setTimeout> | undefined;
+
+	function start() {
+		clearTimeout(timer);
+		timer = setTimeout(() => document.getElementById('nav-progress')?.classList.add('loading'), SHOW_DELAY_MS);
+	}
+
+	function stop() {
+		clearTimeout(timer);
+		document.getElementById('nav-progress')?.classList.remove('loading');
+	}
+
+	document.addEventListener('astro:before-preparation', start);
+	document.addEventListener('astro:after-swap', stop);
+	document.addEventListener('astro:page-load', stop);
+</script>
+
+<style>
+	.nav-progress {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 100;
+		height: 3px;
+		width: 0;
+		background: var(--accent-warm);
+		opacity: 0;
+		pointer-events: none;
+	}
+	.nav-progress:global(.loading) {
+		opacity: 1;
+		width: 85%;
+		transition: width 8s cubic-bezier(0.1, 0.7, 0.3, 1);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.nav-progress:global(.loading) {
+			width: 100%;
+			transition: none;
+		}
+	}
+</style>
